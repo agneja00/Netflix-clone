@@ -2,7 +2,7 @@ import { useState } from "react";
 import Youtube from "react-youtube";
 import styles from "./Row.module.scss";
 import { useMovies, useMovieTrailer } from "./hooks";
-import { API_CONFIG } from "../../config/constants";
+import { API_CONFIG } from "@/config/constants";
 
 interface RowProps {
   category: string;
