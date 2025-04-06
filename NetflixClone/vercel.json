@@ -1,24 +1,5 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "vite.config.ts",
-      "use": "@vercel/static-build",
-      "config": { "distDir": "dist" }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/assets/(.*)",
-      "headers": { "Cache-Control": "public, max-age=31536000, immutable" }
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html",
-      "headers": { "Cache-Control": "public, max-age=0, must-revalidate" }
-    }
-  ],
-  "env": {
-    "VITE_TMDB_API_KEY": "@tmdb_api_key"
-  }
+  "buildCommand": "yarn build",
+  "outputDirectory": "dist",
+  "framework": "vite"
 }
