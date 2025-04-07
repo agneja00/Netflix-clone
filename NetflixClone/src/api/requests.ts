@@ -9,6 +9,6 @@ const requests = {
   fetchHorrorMovies: `${API_CONFIG.TMDB.API_BASE}discover/movie?with_genres=27`,
   fetchRomanceMovies: `${API_CONFIG.TMDB.API_BASE}discover/movie?with_genres=10749`,
   fetchDocumentaries: `${API_CONFIG.TMDB.API_BASE}discover/movie?with_genres=99`,
-} as const;
+};
 
 export default requests;

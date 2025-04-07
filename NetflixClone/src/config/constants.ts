@@ -7,4 +7,4 @@ export const API_CONFIG = {
       TRAILER: "videos",
     },
   },
-} as const;
+};
