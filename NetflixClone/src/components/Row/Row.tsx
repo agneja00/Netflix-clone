@@ -47,7 +47,9 @@ const Row: React.FC<RowProps> = ({
               className={styles.row__image}
               loading="lazy"
             />
-            <h3 className={styles.row__name}>{movie?.original_title || movie?.title}</h3>
+            <h3 className={styles.row__name}>
+              {movie?.original_title || movie?.title}
+            </h3>
           </div>
         ))}
       </div>

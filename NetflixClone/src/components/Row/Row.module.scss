@@ -5,8 +5,8 @@
 
   &__title {
     font-size: 1.4rem;
-    margin-bottom: 10px;
-    font-weight: 600;
+    margin: 1.5rem 0;
+    font-weight: 700;
     color: rgba(248, 10, 10, 0.91);
   }
 
@@ -18,7 +18,6 @@
     display: flex;
     overflow-y: hidden;
     overflow-x: auto;
-    padding: 20px 0;
     gap: 10px;
     scrollbar-width: none;
     -ms-overflow-style: none;
