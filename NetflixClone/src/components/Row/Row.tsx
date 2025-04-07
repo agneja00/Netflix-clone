@@ -43,10 +43,11 @@ const Row: React.FC<RowProps> = ({
               src={`${API_CONFIG.TMDB.IMAGE_BASE}${
                 isLargeRow ? movie.poster_path : movie.backdrop_path
               }`}
-              alt={movie.title || movie.name}
+              alt={movie?.title || movie?.name}
               className={styles.row__image}
               loading="lazy"
             />
+            <h3 className={styles.row__name}>{movie?.original_title || movie?.title}</h3>
           </div>
         ))}
       </div>

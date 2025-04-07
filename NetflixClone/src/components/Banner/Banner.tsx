@@ -19,7 +19,7 @@ const Banner = () => {
         <h1 className={styles.banner__title}>
           {featuredMovie?.title ||
             featuredMovie?.name ||
-            featuredMovie?.original_name}
+            featuredMovie?.original_title}
         </h1>
         <h1 className={styles.banner__description}>
           {featuredMovie?.overview}
