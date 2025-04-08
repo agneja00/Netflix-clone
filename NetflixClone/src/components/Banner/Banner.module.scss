@@ -1,6 +1,5 @@
 .banner {
   position: relative;
-  color: $secondary-color;
   height: 28rem;
 
   @include respond-to("md") {
@@ -31,6 +30,7 @@
   }
 
   &__title {
+    color: $netflix-red-color;
     align-self: flex-start;
     font-size: 1.5rem;
     font-weight: 800;
@@ -42,6 +42,7 @@
   }
 
   &__description {
+    color: $secondary-color;
     font-size: 0.8rem;
     text-align: justify;
     padding-top: 0.5rem;

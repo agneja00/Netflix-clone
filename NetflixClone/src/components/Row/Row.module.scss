@@ -8,7 +8,7 @@
     font-size: 1.4rem;
     margin: 1.5rem 0;
     font-weight: 700;
-    color: $tertiary-color;
+    color: $netflix-red-color;
   }
 
   &__name {
@@ -55,14 +55,51 @@
       max-height: 15.625rem;
     }
   }
+}
 
-  .loading {
+.videoWrapper {
+  width: 100%;
+}
+
+.trailerContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__closeButton {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    background: $netflix-red-color;
     color: $secondary-color;
-    @include loading-and-error;
-  }
+    border: none;
+    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.2s;
 
-  .error {
-    color: $tertiary-color;
-    @include loading-and-error;
+    &:hover {
+      transform: scale(1.1);
+      background: rgb(255, 10, 22);
+    }
   }
+}
+
+.loading {
+  color: $secondary-color;
+  @include loading-and-error;
+}
+
+.error {
+  color: $netflix-red-color;
+  @include loading-and-error;
 }
