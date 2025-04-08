@@ -1,11 +1,30 @@
-$netflix-red: #e50914;
-$netflix-black: #111;
-$netflix-dark-gray: #222;
-$netflix-light-gray: #e6e6e6;
+@use "sass:map";
 
-$nav-height: 30px;
-$banner-height: 450px;
-$banner-content-padding: 140px;
+$primary-color: rgb(0, 0, 0);
+$secondary-color: rgb(255, 255, 255);
+$tertiary-color: rgb(255, 0, 0);
 
-$transition-fast: 0.2s;
-$transition-medium: 0.5s;
+@mixin loading-and-error {
+  padding: 1.25rem;
+  text-align: center;
+}
+
+$breakpoints: (
+  "sm": 576px,
+  "md": 768px,
+  "lg": 992px,
+  "xl": 1200px,
+  "xxl": 1400px,
+);
+
+@mixin respond-to($breakpoint) {
+  $width: map.get($breakpoints, $breakpoint);
+
+  @if not $width {
+    @error "Breakpoint '#{$breakpoint}' not found in $breakpoints map.";
+  }
+
+  @media (min-width: $width) {
+    @content;
+  }
+}

@@ -1,24 +1,25 @@
 .row {
-  color: white;
-  margin-left: 20px;
-  margin-bottom: 30px;
+  color: $secondary-color;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  margin-bottom: 1.875rem;
 
   &__title {
     font-size: 1.4rem;
     margin: 1.5rem 0;
     font-weight: 700;
-    color: rgba(248, 10, 10, 0.91);
+    color: $tertiary-color;
   }
 
   &__name {
     font-size: 90%;
+    padding-bottom: 1rem;
   }
 
   &__posters {
     display: flex;
     overflow-y: hidden;
-    overflow-x: auto;
-    gap: 10px;
+    gap: 0.625rem;
     scrollbar-width: none;
     -ms-overflow-style: none;
 
@@ -34,7 +35,6 @@
 
     &:hover {
       transform: scale(1.08);
-      z-index: 1;
     }
   }
 
@@ -45,39 +45,24 @@
   }
 
   &__image {
-    max-height: 150px;
+    max-height: 9.375rem;
     object-fit: contain;
-    border-radius: 4px;
+    border-radius: 0.25rem;
     transition: all 0.3s ease;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 
     .row__posterLarge & {
-      max-height: 250px;
+      max-height: 15.625rem;
     }
   }
 
-  &__trailer {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.9);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-
   .loading {
-    color: white;
-    padding: 20px;
-    text-align: center;
+    color: $secondary-color;
+    @include loading-and-error;
   }
 
   .error {
-    color: red;
-    padding: 20px;
-    text-align: center;
+    color: $tertiary-color;
+    @include loading-and-error;
   }
 }

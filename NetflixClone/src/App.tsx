@@ -6,7 +6,7 @@ import Row from "./components/Row/Row";
 
 const App = () => {
   return (
-    <div className="app">
+    <>
       <Nav />
       <Banner />
       <Row category="TRENDING" fetchUrl={requests.fetchTrending} isLargeRow />
@@ -16,7 +16,7 @@ const App = () => {
       <Row category="HORROR MOVIES" fetchUrl={requests.fetchHorrorMovies} />
       <Row category="ROMANCE MOVIES" fetchUrl={requests.fetchRomanceMovies} />
       <Row category="DOCUMENTARIES" fetchUrl={requests.fetchDocumentaries} />
-    </div>
+    </>
   );
 };
 

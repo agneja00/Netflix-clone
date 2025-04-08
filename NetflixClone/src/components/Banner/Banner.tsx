@@ -6,7 +6,7 @@ const Banner = () => {
   const { data: featuredMovie } = useNetflixOriginals();
 
   return (
-    <header className={styles.banner}>
+    <div className={styles.banner}>
       <div
         className={styles.banner__background}
         style={{
@@ -25,9 +25,7 @@ const Banner = () => {
           {featuredMovie?.overview}
         </h1>
       </div>
-
-      <div className={styles.banner__fadeBottom} />
-    </header>
+    </div>
   );
 };
 
