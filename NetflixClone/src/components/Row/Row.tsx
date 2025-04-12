@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import YouTube from "react-youtube";
 import styles from "./Row.module.scss";
-import { useMovies, useMovieTrailer } from "./hooks";
+import { useMovies, useMovieTrailer } from "../hooks/hooks";
 import { API_CONFIG } from "@/config/constants";
 
 interface RowProps {

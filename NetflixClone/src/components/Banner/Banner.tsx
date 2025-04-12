@@ -1,5 +1,5 @@
 import styles from "./Banner.module.scss";
-import { useNetflixOriginals } from "./hooks";
+import { useNetflixOriginals } from "../hooks/hooks";
 import { API_CONFIG } from "@/config/constants";
 
 const Banner = () => {
