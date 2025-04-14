@@ -1,21 +1,26 @@
-import "./App.css";
-import Banner from "./components/Banner/Banner";
-import requests from "./api/requests";
-import Nav from "./components/Nav/Nav";
+import { useState } from "react";
+import GenreFilter from "./components/GenreFilter/GenreFilter";
 import Row from "./components/Row/Row";
+import { API_CONFIG } from "./config/constants";
+import Banner from "./components/Banner/Banner";
+import Nav from "./components/Nav/Nav";
 
 const App = () => {
+  const [selectedGenre, setSelectedGenre] = useState<number | null>(null);
+
+  const genreUrl = selectedGenre
+    ? `${API_CONFIG.TMDB.API_BASE}discover/movie?with_genres=${selectedGenre}`
+    : `${API_CONFIG.TMDB.API_BASE}trending/all/week?language=en-US`;
+
   return (
     <>
       <Nav />
       <Banner />
-      <Row category="TRENDING" fetchUrl={requests.fetchTrending} isLargeRow />
-      <Row category="TOP RATED" fetchUrl={requests.fetchTopRated} />
-      <Row category="ACTION MOVIES" fetchUrl={requests.fetchActionMovies} />
-      <Row category="COMEDY MOVIES" fetchUrl={requests.fetchComedyMovies} />
-      <Row category="HORROR MOVIES" fetchUrl={requests.fetchHorrorMovies} />
-      <Row category="ROMANCE MOVIES" fetchUrl={requests.fetchRomanceMovies} />
-      <Row category="DOCUMENTARIES" fetchUrl={requests.fetchDocumentaries} />
+      <GenreFilter
+        selectedGenreId={selectedGenre}
+        onSelectGenre={setSelectedGenre}
+      />
+      <Row category="Filtered Results" fetchUrl={genreUrl} isLargeRow />
     </>
   );
 };

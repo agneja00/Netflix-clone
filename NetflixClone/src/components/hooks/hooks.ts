@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "@/api/axios";
-import { IMovie, IVideo } from "../types/types";
+import { IGenre, IMovie, IVideo } from "../types/types";
 import { API_CONFIG } from "@/config/constants";
+import { fetchGenres } from "@/api/genres";
 
 export const useMovies = (fetchUrl: string) => {
   return useQuery({
@@ -52,5 +53,16 @@ export const useNetflixOriginals = () => {
       const randomIndex = Math.floor(Math.random() * data.length);
       return data[randomIndex] || {};
     },
+  });
+};
+
+export const useGenres = () => {
+  return useQuery<IGenre[]>({
+    queryKey: ["genres"],
+    queryFn: async () => {
+      const genres = await fetchGenres();
+      return genres;
+    },
+    staleTime: 1000 * 60 * 60 * 24,
   });
 };
