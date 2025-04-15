@@ -1,5 +1,5 @@
 import styles from "./Row.module.scss";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import YouTube from "react-youtube";
 import { useMovies, useMovieTrailer } from "../hooks/hooks";
 import { API_CONFIG } from "@/config/constants";
@@ -30,6 +30,20 @@ const Row: React.FC<RowProps> = ({
     setSelectedMovieId(null);
   }, []);
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeTrailer();
+    };
+
+    if (trailerUrl) {
+      window.addEventListener("keydown", handleKeyDown);
+    }
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [trailerUrl, closeTrailer]);
+
   if (isLoading)
     return <div className={styles.loading}>Loading {category}...</div>;
   if (error)
@@ -42,7 +56,7 @@ const Row: React.FC<RowProps> = ({
       <div
         className={classNames(
           styles.row__posters,
-          genre && styles["row__posters--genre"],
+          genre && styles["row__posters--genre"]
         )}
       >
         {movies.map((movie) => (
