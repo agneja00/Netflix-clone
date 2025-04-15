@@ -1,16 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "@/api/axios";
-import { IGenre, IMovie, IVideo } from "../types/types";
-import { API_CONFIG } from "@/config/constants";
-import { fetchGenres } from "@/api/genres";
+import {
+  fetchGenres,
+  fetchMovieDetails,
+  fetchMovieTrailer,
+  fetchMoviesByUrl,
+  fetchNetflixOriginals,
+} from "@/api/api";
+import { IGenre, IMovie } from "@/components/types/types";
 
 export const useMovies = (fetchUrl: string) => {
   return useQuery({
     queryKey: ["movies", fetchUrl],
-    queryFn: async () => {
-      const response = await axios.get(fetchUrl);
-      return response.data.results as IMovie[];
-    },
+    queryFn: () => fetchMoviesByUrl(fetchUrl),
     staleTime: 1000 * 60 * 60,
   });
 };
@@ -18,24 +19,7 @@ export const useMovies = (fetchUrl: string) => {
 export const useMovieTrailer = (movieId: number | null) => {
   return useQuery({
     queryKey: ["trailer", movieId],
-    queryFn: async () => {
-      if (!movieId) return null;
-
-      const { data } = await axios.get(
-        `${API_CONFIG.TMDB.ENDPOINTS.MOVIE}/${movieId}`,
-        {
-          params: {
-            api_key: import.meta.env.VITE_TMDB_API_KEY,
-            append_to_response: API_CONFIG.TMDB.ENDPOINTS.TRAILER,
-          },
-        },
-      );
-
-      return (
-        data.videos?.results?.find((vid: IVideo) => vid.type === "Trailer")
-          ?.key || null
-      );
-    },
+    queryFn: () => (movieId ? fetchMovieTrailer(movieId) : null),
     enabled: !!movieId,
   });
 };
@@ -43,12 +27,7 @@ export const useMovieTrailer = (movieId: number | null) => {
 export const useNetflixOriginals = () => {
   return useQuery({
     queryKey: ["netflixOriginals"],
-    queryFn: async () => {
-      const response = await axios.get(
-        `${API_CONFIG.TMDB.API_BASE}discover/tv?api_key=${import.meta.env.VITE_TMDB_API_KEY}&with_networks=213`,
-      );
-      return response.data.results as IMovie[];
-    },
+    queryFn: fetchNetflixOriginals,
     select: (data: IMovie[]) => {
       const randomIndex = Math.floor(Math.random() * data.length);
       return data[randomIndex] || {};
@@ -59,10 +38,15 @@ export const useNetflixOriginals = () => {
 export const useGenres = () => {
   return useQuery<IGenre[]>({
     queryKey: ["genres"],
-    queryFn: async () => {
-      const genres = await fetchGenres();
-      return genres;
-    },
+    queryFn: fetchGenres,
     staleTime: 1000 * 60 * 60 * 24,
+  });
+};
+
+export const useMovieDetails = (id: string | undefined) => {
+  return useQuery({
+    queryKey: ["movieDetails", id],
+    queryFn: () => fetchMovieDetails(id!),
+    enabled: !!id,
   });
 };

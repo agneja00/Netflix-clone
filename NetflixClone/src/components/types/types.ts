@@ -6,6 +6,7 @@ export interface IMovie {
   backdrop_path?: string;
   overview?: string;
   poster_path?: string;
+  genres?: IGenre[];
 }
 
 export interface IVideo {

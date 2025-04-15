@@ -1,9 +1,9 @@
 import styles from "./Row.module.scss";
-import { useState, useCallback, useEffect } from "react";
-import YouTube from "react-youtube";
-import { useMovies, useMovieTrailer } from "../hooks/hooks";
+import { useMovies } from "../hooks/hooks";
 import { API_CONFIG } from "@/config/constants";
 import classNames from "classnames";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "@/constants/routes";
 
 interface RowProps {
   category: string;
@@ -18,31 +18,8 @@ const Row: React.FC<RowProps> = ({
   isLargeRow = false,
   genre,
 }) => {
-  const [selectedMovieId, setSelectedMovieId] = useState<number | null>(null);
   const { data: movies = [], isLoading, error } = useMovies(fetchUrl);
-  const { data: trailerUrl } = useMovieTrailer(selectedMovieId);
-
-  const handleClick = useCallback((movieId: number) => {
-    setSelectedMovieId((prevId) => (prevId === movieId ? null : movieId));
-  }, []);
-
-  const closeTrailer = useCallback(() => {
-    setSelectedMovieId(null);
-  }, []);
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") closeTrailer();
-    };
-
-    if (trailerUrl) {
-      window.addEventListener("keydown", handleKeyDown);
-    }
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [trailerUrl, closeTrailer]);
+  const navigate = useNavigate();
 
   if (isLoading)
     return <div className={styles.loading}>Loading {category}...</div>;
@@ -56,7 +33,7 @@ const Row: React.FC<RowProps> = ({
       <div
         className={classNames(
           styles.row__posters,
-          genre && styles["row__posters--genre"]
+          genre && styles["row__posters--genre"],
         )}
       >
         {movies.map((movie) => (
@@ -65,10 +42,15 @@ const Row: React.FC<RowProps> = ({
             className={`${styles.row__poster} ${
               isLargeRow ? styles.row__posterLarge : ""
             }`}
-            onClick={() => handleClick(movie.id)}
+            onClick={() =>
+              navigate(ROUTES.MOVIE_ID.replace(":id", movie.id.toString()))
+            }
             role="button"
             tabIndex={0}
-            onKeyDown={(e) => e.key === "Enter" && handleClick(movie.id)}
+            onKeyDown={(e) =>
+              e.key === "Enter" &&
+              navigate(ROUTES.MOVIE_ID.replace(":id", movie.id.toString()))
+            }
           >
             <img
               src={`${API_CONFIG.TMDB.IMAGE_BASE}${
@@ -84,33 +66,6 @@ const Row: React.FC<RowProps> = ({
           </div>
         ))}
       </div>
-
-      {trailerUrl && (
-        <div className={styles.trailerOverlay}>
-          <div className={styles.trailerContainer}>
-            <button
-              className={styles.trailerContainer__closeButton}
-              onClick={closeTrailer}
-              aria-label="Close trailer"
-            >
-              ✕
-            </button>
-            <div className={styles.videoWrapper}>
-              <YouTube
-                videoId={trailerUrl}
-                opts={{
-                  height: "390",
-                  width: "100%",
-                  playerVars: {
-                    autoplay: 1,
-                    origin: window.location.origin,
-                  },
-                }}
-              />
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
