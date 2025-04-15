@@ -16,39 +16,46 @@ const MoviePage = () => {
 
   return (
     <div className={styles.moviePage}>
-      <div className={styles.header}>
+      <div className={styles.hero}>
         <img
           src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
           alt={movie.title}
-          className={styles.backdrop}
+          className={styles.hero__backdrop}
         />
-        <h1>{movie.title || movie.name}</h1>
+        <h1 className={styles.hero__title}>{movie.title || movie.name}</h1>
       </div>
 
-      <div className={styles.content}>
+      <div className={styles.moviePage__content}>
         <img
           src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
           alt={movie.title}
-          className={styles.poster}
+          className={styles.moviePage__poster}
         />
 
-        <div className={styles.details}>
-          <h2>Overview</h2>
-          <p>{movie.overview}</p>
+        <div className={styles.moviePage__details}>
+          <h2 className={styles.moviePage__details__title}>Overview</h2>
+          <p className={styles.moviePage__details__paragraph}>
+            {movie.overview}
+          </p>
 
           {movie.genres && (
             <>
-              <h3>Genres</h3>
-              <ul>
+              <h3 className={styles.moviePage__details__title}>Genres</h3>
+              <ul className={styles.moviePage__details__list}>
                 {movie.genres.map((genre) => (
-                  <li key={genre.id}>{genre.name}</li>
+                  <li
+                    key={genre.id}
+                    className={styles.moviePage__details__list__link}
+                  >
+                    {genre.name}
+                  </li>
                 ))}
               </ul>
             </>
           )}
           {trailer && (
             <div className={styles.trailer}>
-              <h3>Trailer</h3>
+              <h3 className={styles.moviePage__details__title}>Trailer</h3>
               <YouTube
                 videoId={trailer.key}
                 opts={{
