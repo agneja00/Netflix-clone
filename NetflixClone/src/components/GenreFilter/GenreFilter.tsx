@@ -1,36 +1,53 @@
 import styles from "./GenreFilter.module.scss";
 import { useGenres } from "../hooks/hooks";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "@/constants/routes";
 
 interface GenreFilterProps {
-  selectedGenreId: number | null;
-  onSelectGenre: (genreId: number | null) => void;
+  selectedGenreName: string | null;
+  onSelectGenre?: (genreName: string | null) => void;
+  className?: string;
 }
 
 const GenreFilter: React.FC<GenreFilterProps> = ({
-  selectedGenreId,
+  selectedGenreName,
   onSelectGenre,
 }) => {
   const { data: genres = [], isLoading } = useGenres();
+  const navigate = useNavigate();
 
   if (isLoading) return <div>Loading genres...</div>;
+
+  const handleGenreClick = (genreName: string | null) => {
+    if (!genreName || genreName === "All") {
+      navigate(ROUTES.HOME);
+    } else if (onSelectGenre) {
+      onSelectGenre(genreName);
+    } else {
+      navigate(ROUTES.MOVIES_BY_GENRE.replace(":genre", genreName));
+    }
+  };
 
   return (
     <div className={styles.genreFilter}>
       <button
-        className={!selectedGenreId ? styles.active : ""}
-        onClick={() => onSelectGenre(null)}
+        className={!selectedGenreName ? styles.active : ""}
+        onClick={() => handleGenreClick(null)}
       >
         All
       </button>
-      {genres.map((genre) => (
-        <button
-          key={genre.id}
-          className={selectedGenreId === genre.id ? styles.active : ""}
-          onClick={() => onSelectGenre(genre.id)}
-        >
-          {genre.name}
-        </button>
-      ))}
+      {genres.map((genre) => {
+        const genreSlug = genre.name.toLowerCase();
+        return (
+          <button
+            key={genre.id}
+            className={selectedGenreName === genreSlug ? styles.active : ""}
+            onClick={() => handleGenreClick(genreSlug)}
+          >
+            {genre.name}
+          </button>
+        );
+      })}
     </div>
   );
 };

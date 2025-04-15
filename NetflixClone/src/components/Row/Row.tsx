@@ -1,19 +1,22 @@
-import { useState, useEffect, useCallback } from "react";
-import YouTube from "react-youtube";
 import styles from "./Row.module.scss";
+import { useState, useCallback } from "react";
+import YouTube from "react-youtube";
 import { useMovies, useMovieTrailer } from "../hooks/hooks";
 import { API_CONFIG } from "@/config/constants";
+import classNames from "classnames";
 
 interface RowProps {
   category: string;
   fetchUrl: string;
   isLargeRow?: boolean;
+  genre?: boolean;
 }
 
 const Row: React.FC<RowProps> = ({
   category,
   fetchUrl,
   isLargeRow = false,
+  genre,
 }) => {
   const [selectedMovieId, setSelectedMovieId] = useState<number | null>(null);
   const { data: movies = [], isLoading, error } = useMovies(fetchUrl);
@@ -27,20 +30,6 @@ const Row: React.FC<RowProps> = ({
     setSelectedMovieId(null);
   }, []);
 
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") closeTrailer();
-    };
-
-    if (trailerUrl) {
-      window.addEventListener("keydown", handleKeyDown);
-    }
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [trailerUrl, closeTrailer]);
-
   if (isLoading)
     return <div className={styles.loading}>Loading {category}...</div>;
   if (error)
@@ -50,11 +39,18 @@ const Row: React.FC<RowProps> = ({
     <div className={styles.row}>
       <h2 className={styles.row__title}>{category}</h2>
 
-      <div className={styles.row__posters}>
+      <div
+        className={classNames(
+          styles.row__posters,
+          genre && styles["row__posters--genre"],
+        )}
+      >
         {movies.map((movie) => (
           <div
             key={movie.id}
-            className={`${styles.row__poster} ${isLargeRow ? styles.row__posterLarge : ""}`}
+            className={`${styles.row__poster} ${
+              isLargeRow ? styles.row__posterLarge : ""
+            }`}
             onClick={() => handleClick(movie.id)}
             role="button"
             tabIndex={0}

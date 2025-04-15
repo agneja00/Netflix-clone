@@ -1,14 +1,14 @@
 .genreFilter {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  padding: 1rem;
+  gap: 1rem;
+  padding: 2rem;
 }
 
 .genreFilter button {
   background-color: transparent;
-  border: 1px solid #fff;
-  color: #ffffff;
+  border: 1px solid $secondary-color;
+  color: $secondary-color;
   padding: 0.4rem 0.8rem;
   cursor: pointer;
   border-radius: 0.25rem;
@@ -17,5 +17,5 @@
 
 .genreFilter button:hover,
 .genreFilter .active {
-  background-color: #e50914;
+  background-color: $netflix-red-color;
 }

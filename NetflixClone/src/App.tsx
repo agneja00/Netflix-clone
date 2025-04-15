@@ -1,27 +1,29 @@
-import { useState } from "react";
-import GenreFilter from "./components/GenreFilter/GenreFilter";
-import Row from "./components/Row/Row";
-import { API_CONFIG } from "./config/constants";
-import Banner from "./components/Banner/Banner";
-import Nav from "./components/Nav/Nav";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "./api/queryClient";
+import HomePage from "./components/pages/HomePage/HomePage";
+import MoviesByGenrePage from "./components/pages/MoviesByGenrePage/MoviesByGenrePage";
+import MoviePage from "./components/pages/MoviePage/MoviePage";
+import { ROUTES } from "./constants/routes";
+import { RootLayout } from "./components/layout/RootLayout";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <RootLayout />,
+    children: [
+      { index: true, element: <HomePage /> },
+      { path: ROUTES.MOVIES_BY_GENRE, element: <MoviesByGenrePage /> },
+      { path: ROUTES.MOVIE_ID, element: <MoviePage /> },
+    ],
+  },
+]);
 
 const App = () => {
-  const [selectedGenre, setSelectedGenre] = useState<number | null>(null);
-
-  const genreUrl = selectedGenre
-    ? `${API_CONFIG.TMDB.API_BASE}discover/movie?with_genres=${selectedGenre}`
-    : `${API_CONFIG.TMDB.API_BASE}trending/all/week?language=en-US`;
-
   return (
-    <>
-      <Nav />
-      <Banner />
-      <GenreFilter
-        selectedGenreId={selectedGenre}
-        onSelectGenre={setSelectedGenre}
-      />
-      <Row category="Filtered Results" fetchUrl={genreUrl} isLargeRow />
-    </>
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   );
 };
 
