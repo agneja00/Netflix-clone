@@ -1,8 +1,11 @@
+import { ROUTES } from "@/constants/routes";
 import styles from "./Nav.module.scss";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Nav = () => {
   const [show, setShow] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,6 +22,7 @@ const Nav = () => {
         className={styles.nav__logo}
         src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/1200px-Netflix_2015_logo.svg.png"
         alt="Netflix Logo"
+        onClick={() => navigate(ROUTES.HOME)}
       />
       <img
         className={styles.nav__avatar}
