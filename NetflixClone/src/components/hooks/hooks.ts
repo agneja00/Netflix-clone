@@ -5,6 +5,7 @@ import {
   fetchMovieTrailer,
   fetchMoviesByUrl,
   fetchNetflixOriginals,
+  fetchSearchResults,
 } from "@/api/api";
 import { IGenre, IMovie } from "@/components/types/types";
 
@@ -48,5 +49,14 @@ export const useMovieDetails = (id: string | undefined) => {
     queryKey: ["movieDetails", id],
     queryFn: () => fetchMovieDetails(id!),
     enabled: !!id,
+  });
+};
+
+export const useSearchMovies = (query: string) => {
+  return useQuery({
+    queryKey: ["searchResults", query],
+    queryFn: () => fetchSearchResults(query),
+    enabled: !!query.trim(),
+    staleTime: 1000 * 60 * 5,
   });
 };

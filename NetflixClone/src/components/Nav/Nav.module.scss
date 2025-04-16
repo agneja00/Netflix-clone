@@ -19,8 +19,20 @@
     cursor: pointer;
   }
 
+  &__searchButton {
+    color: red;
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+
   &__avatar {
     width: 1.875rem;
     cursor: pointer;
   }
+}
+
+.rightContainer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }

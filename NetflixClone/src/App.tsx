@@ -6,6 +6,7 @@ import MoviesByGenrePage from "./components/pages/MoviesByGenrePage/MoviesByGenr
 import MoviePage from "./components/pages/MoviePage/MoviePage";
 import { ROUTES } from "./constants/routes";
 import { RootLayout } from "./components/layout/RootLayout";
+import SearchResultsPage from "./components/pages/SearchResultsPage/SearchResultsPage";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,7 @@ const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       { path: ROUTES.MOVIES_BY_GENRE, element: <MoviesByGenrePage /> },
       { path: ROUTES.MOVIE_ID, element: <MoviePage /> },
+      { path: ROUTES.MOVIE_SEARCH, element: <SearchResultsPage /> },
     ],
   },
 ]);

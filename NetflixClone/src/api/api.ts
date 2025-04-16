@@ -29,7 +29,6 @@ export const fetchMovieDetails = async (
       append_to_response: "videos",
     },
   });
-
   return data;
 };
 
@@ -41,9 +40,29 @@ export const fetchMovieTrailer = async (
       append_to_response: "videos",
     },
   });
-
   return (
     data.videos?.results?.find((vid: IVideo) => vid.type === "Trailer")?.key ||
     null
   );
+};
+
+export const fetchSearchResults = async (query: string): Promise<IMovie[]> => {
+  if (!query.trim()) return [];
+
+  try {
+    const res = await axios.get("/search/multi", {
+      params: {
+        query: encodeURIComponent(query),
+        include_adult: false,
+        language: "en-US",
+        page: 1,
+      },
+    });
+
+    return (res.data.results || []).filter(
+      (item: IMovie) => item.media_type === "movie" || item.media_type === "tv",
+    );
+  } catch (error) {
+    return [];
+  }
 };
