@@ -1,37 +1,27 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useGenres } from "../../hooks/hooks";
+import { useGenres, useMovies } from "../../hooks/hooks";
 import Banner from "@/components/Banner/Banner";
 import Row from "@/components/Row/Row";
 import GenreFilter from "@/components/GenreFilter/GenreFilter";
-import { API_CONFIG } from "@/config/constants";
 import { ROUTES } from "@/constants/routes";
-import requests from "@/api/requests";
-
-const genreMap: Record<string, keyof typeof requests> = {
-  action: "fetchActionMovies",
-  comedy: "fetchComedyMovies",
-  horror: "fetchHorrorMovies",
-  romance: "fetchRomanceMovies",
-  documentaries: "fetchDocumentaries",
-};
+import styles from "./MoviesByGenrePage.module.scss";
+import { getGenreFetchUrl } from "@/api/api";
 
 const MoviesByGenrePage = () => {
   const { genre } = useParams<{ genre: string }>();
   const navigate = useNavigate();
-  const { data: genres = [], isLoading } = useGenres();
+  const { data: genres = [], isLoading: isGenresLoading } = useGenres();
 
-  if (isLoading) return <div>Loading genres...</div>;
-
+  const fetchUrl = genre ? getGenreFetchUrl(genre, genres) : null;
   const selectedGenre = genres.find(
     (g) => g.name.toLowerCase() === genre?.toLowerCase(),
   );
 
-  if (!selectedGenre) return <div>Genre not found</div>;
-
-  const requestKey = genreMap[genre?.toLowerCase() || ""];
-  const fetchUrl = requestKey
-    ? requests[requestKey]
-    : `${API_CONFIG.TMDB.API_BASE}discover/movie?with_genres=${selectedGenre.id}`;
+  const {
+    data: movies = [],
+    isLoading: isMoviesLoading,
+    error,
+  } = useMovies(fetchUrl || "", { enabled: !!fetchUrl });
 
   const handleGenreSelect = (genreName: string | null) => {
     if (genreName) {
@@ -41,18 +31,38 @@ const MoviesByGenrePage = () => {
     }
   };
 
+  if (isGenresLoading)
+    return <div className={styles.loading}>Loading genres...</div>;
+  if (!genre) return <div className={styles.error}>No genre selected</div>;
+  if (!selectedGenre && !fetchUrl)
+    return <div className={styles.error}>Genre not found</div>;
+  if (error) return <div className={styles.error}>Error loading movies</div>;
+
   return (
     <>
       <Banner />
-      <GenreFilter
-        selectedGenreName={genre?.toLowerCase() || null}
-        onSelectGenre={handleGenreSelect}
-      />
-      <Row
-        genre
-        category={`${selectedGenre.name} Movies`}
-        fetchUrl={fetchUrl}
-      />
+      <div className={styles.container}>
+        <GenreFilter
+          selectedGenreName={genre?.toLowerCase() || null}
+          onSelectGenre={handleGenreSelect}
+        />
+
+        {isMoviesLoading ? (
+          <div className={styles.loading}>Loading movies...</div>
+        ) : (
+          <>
+            <Row
+              category={`${selectedGenre?.name || genre} Movies`}
+              movies={movies}
+            />
+            {!movies.length && (
+              <div className={styles.noResults}>
+                No movies found for this genre
+              </div>
+            )}
+          </>
+        )}
+      </div>
     </>
   );
 };

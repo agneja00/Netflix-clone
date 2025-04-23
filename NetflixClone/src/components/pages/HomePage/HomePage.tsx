@@ -1,3 +1,4 @@
+import styles from "./HomePage.module.scss";
 import { useNavigate } from "react-router-dom";
 import GenreFilter from "@/components/GenreFilter/GenreFilter";
 import Banner from "@/components/Banner/Banner";
@@ -19,14 +20,47 @@ const HomePage = () => {
   return (
     <>
       <Banner />
-      <GenreFilter selectedGenreName={null} onSelectGenre={handleGenreSelect} />
-      <Row category="TRENDING" fetchUrl={requests.fetchTrending} isLargeRow />
-      <Row category="TOP RATED" fetchUrl={requests.fetchTopRated} />
-      <Row category="ACTION MOVIES" fetchUrl={requests.fetchActionMovies} />
-      <Row category="COMEDY MOVIES" fetchUrl={requests.fetchComedyMovies} />
-      <Row category="HORROR MOVIES" fetchUrl={requests.fetchHorrorMovies} />
-      <Row category="ROMANCE MOVIES" fetchUrl={requests.fetchRomanceMovies} />
-      <Row category="DOCUMENTARIES" fetchUrl={requests.fetchDocumentaries} />
+      <div className={styles.wrapper}>
+        <GenreFilter
+          selectedGenreName={null}
+          onSelectGenre={handleGenreSelect}
+        />
+        <Row
+          category="TRENDING"
+          fetchUrl={requests.fetchTrending}
+          showType={true}
+        />
+        <Row
+          category="TOP RATED"
+          fetchUrl={requests.fetchTopRated}
+          showType={true}
+        />
+        <Row
+          category="ACTION MOVIES"
+          fetchUrl={requests.fetchActionMovies}
+          showType={true}
+        />
+        <Row
+          category="COMEDY MOVIES"
+          fetchUrl={requests.fetchComedyMovies}
+          showType={true}
+        />
+        <Row
+          category="HORROR MOVIES"
+          fetchUrl={requests.fetchHorrorMovies}
+          showType={true}
+        />
+        <Row
+          category="ROMANCE MOVIES"
+          fetchUrl={requests.fetchRomanceMovies}
+          showType={true}
+        />
+        <Row
+          category="DOCUMENTARIES"
+          fetchUrl={requests.fetchDocumentaries}
+          showType={true}
+        />
+      </div>
     </>
   );
 };

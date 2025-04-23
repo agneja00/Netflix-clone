@@ -1,6 +1,7 @@
 import axios from "@/api/axios";
 import { IGenre, IMovie, IVideo } from "@/components/types/types";
 import requests from "@/api/requests";
+import { API_CONFIG } from "@/config/constants";
 
 export const fetchGenres = async (): Promise<IGenre[]> => {
   try {
@@ -9,6 +10,34 @@ export const fetchGenres = async (): Promise<IGenre[]> => {
   } catch {
     return [];
   }
+};
+
+export const getGenreFetchUrl = (
+  genreName: string,
+  genres: IGenre[],
+): string | null => {
+  const genreMap: Record<string, keyof typeof requests> = {
+    action: "fetchActionMovies",
+    comedy: "fetchComedyMovies",
+    horror: "fetchHorrorMovies",
+    romance: "fetchRomanceMovies",
+    documentaries: "fetchDocumentaries",
+    trending: "fetchTrending",
+    top_rated: "fetchTopRated",
+  };
+
+  const requestKey = genreMap[genreName.toLowerCase()];
+  if (requestKey) {
+    return requests[requestKey];
+  }
+
+  const selectedGenre = genres.find(
+    (g) => g.name.toLowerCase() === genreName.toLowerCase(),
+  );
+
+  return selectedGenre
+    ? `${API_CONFIG.TMDB.API_BASE}discover/movie?with_genres=${selectedGenre.id}`
+    : null;
 };
 
 export const fetchNetflixOriginals = async (): Promise<IMovie[]> => {
@@ -59,10 +88,18 @@ export const fetchSearchResults = async (query: string): Promise<IMovie[]> => {
       },
     });
 
-    return (res.data.results || []).filter(
-      (item: IMovie) => item.media_type === "movie" || item.media_type === "tv",
-    );
+    return (res.data.results || [])
+      .filter(
+        (item: IMovie) =>
+          item.media_type === "movie" || item.media_type === "tv",
+      )
+      .map((item: IMovie) => ({
+        ...item,
+        title: item.title || item.name || item.original_title,
+        poster_path: item.poster_path || item.backdrop_path,
+      }));
   } catch (error) {
+    console.error("Search error:", error);
     return [];
   }
 };

@@ -1,7 +1,6 @@
 .searchPage {
   padding: 2rem;
   min-height: 100vh;
-  background-color: #0f0f0f;
   color: #fff;
 
   &__title {
@@ -11,46 +10,6 @@
     color: #e5e5e5;
     padding-bottom: 0.5rem;
     border-bottom: 1px solid #333;
-  }
-
-  &__resultsGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
-    gap: 1.5rem;
-    padding: 1rem 0;
-
-    @include respond-to("md") {
-      grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
-    }
-  }
-
-  &__card {
-    background: #181818;
-    border-radius: 0.4rem;
-    overflow: hidden;
-    transition: transform 0.2s ease;
-
-    &:hover {
-      transform: translateY(-0.5rem);
-    }
-  }
-
-  &__poster {
-    width: 100%;
-    aspect-ratio: 2/3;
-    object-fit: cover;
-    display: block;
-  }
-
-  &__name {
-    display: block;
-    padding: 0.8rem;
-    font-size: 0.9rem;
-    color: #e5e5e5;
-    text-align: center;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 }
 

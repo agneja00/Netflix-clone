@@ -9,11 +9,12 @@ import {
 } from "@/api/api";
 import { IGenre, IMovie } from "@/components/types/types";
 
-export const useMovies = (fetchUrl: string) => {
+export const useMovies = (fetchUrl: string, options = {}) => {
   return useQuery({
     queryKey: ["movies", fetchUrl],
     queryFn: () => fetchMoviesByUrl(fetchUrl),
     staleTime: 1000 * 60 * 60,
+    ...options,
   });
 };
 

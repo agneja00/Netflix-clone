@@ -1,126 +1,35 @@
 .row {
-  color: $secondary-color;
-  margin-left: 1.5rem;
-  margin-right: 1.5rem;
-  margin-bottom: 1.875rem;
-
   &__title {
     font-size: 1.4rem;
+    text-transform: uppercase;
+    padding-bottom: 0.7rem;
     margin: 1.5rem 0;
     font-weight: 700;
     color: $netflix-red-color;
-  }
-
-  &__name {
-    font-size: 90%;
-    padding-bottom: 1rem;
+    border-bottom: 1px solid $netflix-red-color;
   }
 
   &__posters {
-    display: flex;
-    overflow-y: hidden;
-    gap: 0.625rem;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+
+    @include respond-to("md") {
+      grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+    }
 
     &::-webkit-scrollbar {
       display: none;
     }
   }
 
-  &__posters--genre {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-
-    @include respond-to("xl") {
-      gap: 2.1rem;
-    }
-  }
-
-  &__poster {
-    transition: transform 0.3s ease;
-    cursor: pointer;
-    flex: 0 1 10rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    &:hover {
-      transform: scale(1.08);
-    }
-
-    .row__posters--genre & {
-      margin-bottom: 1rem;
-    }
-
-    @include respond-to("sm") {
-      flex: 0 1 7.5rem;
-    }
-  }
-
-  &__posterLarge {
-    &:hover {
-      transform: scale(1.09);
-    }
-  }
-
-  &__image {
-    max-height: 9.375rem;
-    object-fit: contain;
-    border-radius: 0.25rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-
-    .row__posterLarge & {
-      max-height: 15.625rem;
-    }
-  }
-}
-
-.videoWrapper {
-  width: 100%;
-}
-
-.trailerContainer {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.9);
-  z-index: 2;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  &__closeButton {
-    position: absolute;
-    top: 1.25rem;
-    right: 1.25rem;
-    background: $netflix-red-color;
+  .loading {
     color: $secondary-color;
-    border: none;
-    border-radius: 50%;
-    width: 2.5rem;
-    height: 2.5rem;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: transform 0.2s;
-
-    &:hover {
-      transform: scale(1.1);
-      background: rgb(255, 10, 22);
-    }
+    @include loading-and-error;
   }
-}
 
-.loading {
-  color: $secondary-color;
-  @include loading-and-error;
-}
-
-.error {
-  color: $netflix-red-color;
-  @include loading-and-error;
+  .error {
+    color: $netflix-red-color;
+    @include loading-and-error;
+  }
 }
