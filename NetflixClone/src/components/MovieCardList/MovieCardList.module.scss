@@ -12,7 +12,8 @@
   &__posters {
     display: grid;
     gap: 1.5rem;
-    grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
+    cursor: pointer;
 
     @include respond-to("md") {
       grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
