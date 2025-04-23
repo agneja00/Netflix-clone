@@ -2,7 +2,7 @@ import styles from "./SearchResultsPage.module.scss";
 import { useSearchParams } from "react-router-dom";
 import { useSearchMovies } from "../../hooks/hooks";
 import Banner from "@/components/Banner/Banner";
-import Row from "@/components/Row/Row";
+import MovieCardList from "@/components/MovieCardList/MovieCardList";
 
 const SearchResultsPage = () => {
   const [searchParams] = useSearchParams();
@@ -30,7 +30,7 @@ const SearchResultsPage = () => {
             {error instanceof Error ? error.message : "Failed to load results"}
           </div>
         ) : results.length > 0 ? (
-          <Row
+          <MovieCardList
             movies={results}
             category={`Search Results (${results.length})`}
             showType={true}

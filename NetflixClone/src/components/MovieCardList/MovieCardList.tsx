@@ -1,16 +1,16 @@
-import styles from "./Row.module.scss";
+import styles from "./MovieCardList.module.scss";
 import { useMovies } from "../hooks/hooks";
 import MovieCard from "../MovieCard/MovieCard";
 import { IMovie } from "../types/types";
 
-interface RowProps {
+interface MovieCardListProps {
   category?: string;
   fetchUrl?: string;
   movies?: IMovie[];
   showType?: boolean;
 }
 
-const Row: React.FC<RowProps> = ({
+const MovieCardList: React.FC<MovieCardListProps> = ({
   category,
   fetchUrl,
   movies: directMovies,
@@ -32,8 +32,8 @@ const Row: React.FC<RowProps> = ({
 
   return (
     <>
-      <h2 className={styles.row__title}>{category}</h2>
-      <div className={styles.row__posters}>
+      <h2 className={styles.list__title}>{category}</h2>
+      <div className={styles.list__posters}>
         {movies.map((movie) => (
           <MovieCard key={movie.id} movie={movie} showType={showType} />
         ))}
@@ -42,4 +42,4 @@ const Row: React.FC<RowProps> = ({
   );
 };
 
-export default Row;
+export default MovieCardList;

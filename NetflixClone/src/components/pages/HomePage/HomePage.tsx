@@ -2,7 +2,7 @@ import styles from "./HomePage.module.scss";
 import { useNavigate } from "react-router-dom";
 import GenreFilter from "@/components/GenreFilter/GenreFilter";
 import Banner from "@/components/Banner/Banner";
-import Row from "@/components/Row/Row";
+import MovieCardList from "@/components/MovieCardList/MovieCardList";
 import requests from "@/api/requests";
 import { ROUTES } from "@/constants/routes";
 
@@ -25,37 +25,37 @@ const HomePage = () => {
           selectedGenreName={null}
           onSelectGenre={handleGenreSelect}
         />
-        <Row
+        <MovieCardList
           category="TRENDING"
           fetchUrl={requests.fetchTrending}
           showType={true}
         />
-        <Row
+        <MovieCardList
           category="TOP RATED"
           fetchUrl={requests.fetchTopRated}
           showType={true}
         />
-        <Row
+        <MovieCardList
           category="ACTION MOVIES"
           fetchUrl={requests.fetchActionMovies}
           showType={true}
         />
-        <Row
+        <MovieCardList
           category="COMEDY MOVIES"
           fetchUrl={requests.fetchComedyMovies}
           showType={true}
         />
-        <Row
+        <MovieCardList
           category="HORROR MOVIES"
           fetchUrl={requests.fetchHorrorMovies}
           showType={true}
         />
-        <Row
+        <MovieCardList
           category="ROMANCE MOVIES"
           fetchUrl={requests.fetchRomanceMovies}
           showType={true}
         />
-        <Row
+        <MovieCardList
           category="DOCUMENTARIES"
           fetchUrl={requests.fetchDocumentaries}
           showType={true}

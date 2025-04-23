@@ -1,10 +1,10 @@
+import styles from "./MoviesByGenrePage.module.scss";
 import { useParams, useNavigate } from "react-router-dom";
 import { useGenres, useMovies } from "../../hooks/hooks";
 import Banner from "@/components/Banner/Banner";
-import Row from "@/components/Row/Row";
+import MovieCardList from "@/components/MovieCardList/MovieCardList";
 import GenreFilter from "@/components/GenreFilter/GenreFilter";
 import { ROUTES } from "@/constants/routes";
-import styles from "./MoviesByGenrePage.module.scss";
 import { getGenreFetchUrl } from "@/api/api";
 
 const MoviesByGenrePage = () => {
@@ -51,7 +51,7 @@ const MoviesByGenrePage = () => {
           <div className={styles.loading}>Loading movies...</div>
         ) : (
           <>
-            <Row
+            <MovieCardList
               category={`${selectedGenre?.name || genre} Movies`}
               movies={movies}
             />
