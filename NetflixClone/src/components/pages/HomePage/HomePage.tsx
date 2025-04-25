@@ -1,65 +1,28 @@
 import styles from "./HomePage.module.scss";
-import { useNavigate } from "react-router-dom";
-import GenreFilter from "@/components/GenreFilter/GenreFilter";
+import ContentFilter from "@/components/ContentFilter/ContentFilter";
 import Banner from "@/components/Banner/Banner";
 import MovieCardList from "@/components/MovieCardList/MovieCardList";
 import requests from "@/api/requests";
-import { ROUTES } from "@/constants/routes";
 
 const HomePage = () => {
-  const navigate = useNavigate();
-
-  const handleGenreSelect = (genreName: string | null) => {
-    if (genreName) {
-      navigate(ROUTES.MOVIES_BY_GENRE.replace(":genre", genreName));
-    } else {
-      navigate("/");
-    }
-  };
+  const categories = [
+    { label: "TRENDING", url: requests.fetchTrending },
+    { label: "TOP RATED", url: requests.fetchTopRated },
+    { label: "ACTION MOVIES", url: requests.fetchActionMovies },
+    { label: "COMEDY MOVIES", url: requests.fetchComedyMovies },
+    { label: "HORROR MOVIES", url: requests.fetchHorrorMovies },
+    { label: "ROMANCE MOVIES", url: requests.fetchRomanceMovies },
+    { label: "DOCUMENTARIES", url: requests.fetchDocumentaries },
+  ];
 
   return (
     <>
       <Banner />
       <div className={styles.wrapper}>
-        <GenreFilter
-          selectedGenreName={null}
-          onSelectGenre={handleGenreSelect}
-        />
-        <MovieCardList
-          category="TRENDING"
-          fetchUrl={requests.fetchTrending}
-          showType={true}
-        />
-        <MovieCardList
-          category="TOP RATED"
-          fetchUrl={requests.fetchTopRated}
-          showType={true}
-        />
-        <MovieCardList
-          category="ACTION MOVIES"
-          fetchUrl={requests.fetchActionMovies}
-          showType={true}
-        />
-        <MovieCardList
-          category="COMEDY MOVIES"
-          fetchUrl={requests.fetchComedyMovies}
-          showType={true}
-        />
-        <MovieCardList
-          category="HORROR MOVIES"
-          fetchUrl={requests.fetchHorrorMovies}
-          showType={true}
-        />
-        <MovieCardList
-          category="ROMANCE MOVIES"
-          fetchUrl={requests.fetchRomanceMovies}
-          showType={true}
-        />
-        <MovieCardList
-          category="DOCUMENTARIES"
-          fetchUrl={requests.fetchDocumentaries}
-          showType={true}
-        />
+        <ContentFilter selectedFilter={null} />
+        {categories.map(({ label, url }) => (
+          <MovieCardList key={label} category={label} fetchUrl={url} showType />
+        ))}
       </div>
     </>
   );

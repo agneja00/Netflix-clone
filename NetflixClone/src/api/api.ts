@@ -5,8 +5,8 @@ import { API_CONFIG } from "@/config/constants";
 
 export const fetchGenres = async (): Promise<IGenre[]> => {
   try {
-    const res = await axios.get("/genre/movie/list");
-    return res.data.genres || [];
+    const { data } = await axios.get("/genre/movie/list");
+    return data.genres || [];
   } catch {
     return [];
   }
@@ -31,32 +31,30 @@ export const getGenreFetchUrl = (
     return requests[requestKey];
   }
 
-  const selectedGenre = genres.find(
-    (g) => g.name.toLowerCase() === genreName.toLowerCase(),
+  const matchedGenre = genres.find(
+    (genre) => genre.name.toLowerCase() === genreName.toLowerCase(),
   );
 
-  return selectedGenre
-    ? `${API_CONFIG.TMDB.API_BASE}discover/movie?with_genres=${selectedGenre.id}`
+  return matchedGenre
+    ? `${API_CONFIG.TMDB.API_BASE}discover/movie?with_genres=${matchedGenre.id}`
     : null;
 };
 
 export const fetchNetflixOriginals = async (): Promise<IMovie[]> => {
-  const response = await axios.get(requests.fetchNetflixOriginals);
-  return response.data.results || [];
+  const { data } = await axios.get(requests.fetchNetflixOriginals);
+  return data.results || [];
 };
 
 export const fetchMoviesByUrl = async (url: string): Promise<IMovie[]> => {
-  const res = await axios.get(url);
-  return res.data.results || [];
+  const { data } = await axios.get(url);
+  return data.results || [];
 };
 
 export const fetchMovieDetails = async (
   id: number | string,
 ): Promise<IMovie & { videos?: { results: IVideo[] } }> => {
   const { data } = await axios.get(`/movie/${id}`, {
-    params: {
-      append_to_response: "videos",
-    },
+    params: { append_to_response: "videos" },
   });
   return data;
 };
@@ -65,21 +63,21 @@ export const fetchMovieTrailer = async (
   movieId: number,
 ): Promise<string | null> => {
   const { data } = await axios.get(`/movie/${movieId}`, {
-    params: {
-      append_to_response: "videos",
-    },
+    params: { append_to_response: "videos" },
   });
-  return (
-    data.videos?.results?.find((vid: IVideo) => vid.type === "Trailer")?.key ||
-    null
+
+  const trailer = data.videos?.results?.find(
+    (vid: IVideo) => vid.type === "Trailer",
   );
+
+  return trailer?.key || null;
 };
 
 export const fetchSearchResults = async (query: string): Promise<IMovie[]> => {
   if (!query.trim()) return [];
 
   try {
-    const res = await axios.get("/search/multi", {
+    const { data } = await axios.get("/search/multi", {
       params: {
         query: encodeURIComponent(query),
         include_adult: false,
@@ -88,11 +86,8 @@ export const fetchSearchResults = async (query: string): Promise<IMovie[]> => {
       },
     });
 
-    return (res.data.results || [])
-      .filter(
-        (item: IMovie) =>
-          item.media_type === "movie" || item.media_type === "tv",
-      )
+    return (data.results || [])
+      .filter((item: IMovie) => ["movie", "tv"].includes(item.media_type ?? ""))
       .map((item: IMovie) => ({
         ...item,
         title: item.title || item.name || item.original_title,
@@ -102,4 +97,32 @@ export const fetchSearchResults = async (query: string): Promise<IMovie[]> => {
     console.error("Search error:", error);
     return [];
   }
+};
+
+export const fetchMoviesByYear = async (year: string): Promise<IMovie[]> => {
+  if (!year) return [];
+
+  const { data } = await axios.get("/discover/movie", {
+    params: {
+      primary_release_year: year,
+      sort_by: "popularity.desc",
+    },
+  });
+
+  return data.results || [];
+};
+
+export const fetchMoviesByRating = async (
+  rating: string,
+): Promise<IMovie[]> => {
+  if (!rating) return [];
+
+  const { data } = await axios.get("/discover/movie", {
+    params: {
+      "vote_average.gte": rating,
+      sort_by: "vote_average.desc",
+    },
+  });
+
+  return data.results || [];
 };
