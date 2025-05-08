@@ -32,7 +32,7 @@ describe("Banner Component", () => {
     render(<Banner />);
 
     expect(screen.getByTestId("banner-error")).toHaveTextContent(
-      "Failed to load data",
+      "Failed to load data"
     );
   });
 
@@ -53,16 +53,16 @@ describe("Banner Component", () => {
     render(<Banner />);
 
     await waitFor(() =>
-      expect(screen.getByTestId("banner")).toBeInTheDocument(),
+      expect(screen.getByTestId("banner")).toBeInTheDocument()
     );
 
     expect(screen.getByTestId("banner-title")).toHaveTextContent("Test Movie");
     expect(screen.getByTestId("banner-description")).toHaveTextContent(
-      "This is a test movie.",
+      "This is a test movie."
     );
 
     expect(screen.getByTestId("banner-background")).toHaveStyle(
-      `background-image: url("${API_CONFIG.TMDB.IMAGE_BASE}/test-backdrop.jpg")`,
+      `background-image: url("${API_CONFIG.TMDB.IMAGE_BASE}/test-backdrop.jpg")`
     );
   });
 
@@ -83,11 +83,11 @@ describe("Banner Component", () => {
     render(<Banner />);
 
     await waitFor(() =>
-      expect(screen.getByTestId("banner")).toBeInTheDocument(),
+      expect(screen.getByTestId("banner")).toBeInTheDocument()
     );
 
     expect(screen.getByTestId("banner-background")).toHaveStyle(
-      "background-image: linear-gradient(to right, #111, #555)",
+      "background-image: linear-gradient(to right, #111, #555)"
     );
   });
 });
