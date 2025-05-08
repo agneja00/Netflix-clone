@@ -55,7 +55,7 @@
     "sass-migrator": "^2.3.1",
     "ts-jest": "^29.3.2",
     "ts-node": "^10.9.2",
-    "typescript": "^5.2.2",
+    "typescript": "5.5",
     "vite": "^6.2.4",
     "vite-plugin-checker": "^0.9.1",
     "vite-plugin-compression": "^0.5.1",
