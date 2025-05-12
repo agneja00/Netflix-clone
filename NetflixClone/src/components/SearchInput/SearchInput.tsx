@@ -1,7 +1,7 @@
 import styles from "./SearchInput.module.scss";
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  value: string;
+export interface InputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   placeholder?: string;
@@ -11,7 +11,7 @@ const SearchInput = ({
   value,
   onChange,
   onKeyDown,
-  placeholder,
+  placeholder = "",
   ...props
 }: InputProps) => {
   return (
