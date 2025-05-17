@@ -36,7 +36,7 @@ describe("Nav Component", () => {
     fireEvent.click(searchButton);
 
     const input = screen.getByPlaceholderText(
-      "Search for movies, shows, and more..."
+      "Search for movies, shows, and more...",
     );
 
     fireEvent.change(input, { target: { value: "Inception" } });
@@ -52,7 +52,7 @@ describe("Nav Component", () => {
     fireEvent.click(searchButton);
 
     const input = screen.getByPlaceholderText(
-      "Search for movies, shows, and more..."
+      "Search for movies, shows, and more...",
     );
 
     fireEvent.keyDown(input, { key: "Enter", code: "Enter" });
@@ -67,14 +67,14 @@ describe("Nav Component", () => {
     fireEvent.click(searchButton);
 
     expect(
-      screen.getByPlaceholderText("Search for movies, shows, and more...")
+      screen.getByPlaceholderText("Search for movies, shows, and more..."),
     ).toBeInTheDocument();
 
     const header = screen.getByRole("banner");
     fireEvent.click(header);
 
     expect(
-      screen.queryByPlaceholderText("Search for movies, shows, and more...")
+      screen.queryByPlaceholderText("Search for movies, shows, and more..."),
     ).not.toBeInTheDocument();
   });
 });
