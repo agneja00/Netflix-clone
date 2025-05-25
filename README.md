@@ -14,7 +14,7 @@ A modern and responsive movie browsing app built with **React**, **Vite**, **Typ
 ### Links
 
 - Code URL: (https://github.com/agneja00/Netflix-clone)
-- Live Site URL: (https://netflix-clone-app-mauve-two.vercel.app/movie/12477)
+- Live Site URL: (https://netflix-clone-app-mauve-two.vercel.app/)
 
 ### Built with
 
