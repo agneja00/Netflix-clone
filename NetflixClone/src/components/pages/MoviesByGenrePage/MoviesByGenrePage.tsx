@@ -5,6 +5,7 @@ import Banner from "@/components/Banner/Banner";
 import MovieCardList from "@/components/MovieCardList/MovieCardList";
 import { getGenreFetchUrl } from "@/api/api";
 import ContentFilter from "@/components/ContentFilter/ContentFilter";
+import PageTitle from "@/components/PageTitle/PageTitle";
 
 const MoviesByGenrePage = () => {
   const { genre } = useParams<{ genre: string }>();
@@ -12,7 +13,7 @@ const MoviesByGenrePage = () => {
 
   const fetchUrl = genre ? getGenreFetchUrl(genre, genres) : null;
   const selectedGenre = genres.find(
-    (g) => g.name.toLowerCase() === genre?.toLowerCase(),
+    (g) => g.name.toLowerCase() === genre?.toLowerCase()
   );
 
   const {
@@ -30,6 +31,7 @@ const MoviesByGenrePage = () => {
 
   return (
     <>
+      <PageTitle title={selectedGenre?.name} />
       <Banner />
       <div className={styles.wrapper}>
         <ContentFilter selectedFilter={genre.toLowerCase()} />

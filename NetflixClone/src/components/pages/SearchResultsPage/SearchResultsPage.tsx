@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { useSearchMovies } from "../../hooks/hooks";
 import Banner from "@/components/Banner/Banner";
 import MovieCardList from "@/components/MovieCardList/MovieCardList";
+import PageTitle from "@/components/PageTitle/PageTitle";
 
 const SearchResultsPage = () => {
   const [searchParams] = useSearchParams();
@@ -17,6 +18,7 @@ const SearchResultsPage = () => {
 
   return (
     <>
+      <PageTitle title={`Results for "${query}"`} />
       <Banner />
       <div className={styles.searchPage}>
         <h2 className={styles.searchPage__title}>

@@ -3,6 +3,7 @@ import ContentFilter from "@/components/ContentFilter/ContentFilter";
 import Banner from "@/components/Banner/Banner";
 import MovieCardList from "@/components/MovieCardList/MovieCardList";
 import requests from "@/api/requests";
+import PageTitle from "@/components/PageTitle/PageTitle";
 
 const HomePage = () => {
   const categories = [
@@ -17,6 +18,7 @@ const HomePage = () => {
 
   return (
     <>
+      <PageTitle title="Home" />
       <Banner />
       <div className={styles.wrapper}>
         <ContentFilter selectedFilter={null} />

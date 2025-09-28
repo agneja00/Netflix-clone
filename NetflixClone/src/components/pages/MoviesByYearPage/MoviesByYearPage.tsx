@@ -4,6 +4,7 @@ import { useMoviesByYear } from "../../hooks/hooks";
 import MovieCardList from "@/components/MovieCardList/MovieCardList";
 import Banner from "@/components/Banner/Banner";
 import ContentFilter from "@/components/ContentFilter/ContentFilter";
+import PageTitle from "@/components/PageTitle/PageTitle";
 
 const MoviesByYearPage = () => {
   const { year } = useParams<{ year: string }>();
@@ -18,6 +19,7 @@ const MoviesByYearPage = () => {
 
   return (
     <>
+    <PageTitle title={year} />
       <Banner />
       <div className={styles.wrapper}>
         <ContentFilter selectedFilter={year} />

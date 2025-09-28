@@ -2,6 +2,7 @@ import styles from "./MoviePage.module.scss";
 import { useParams } from "react-router-dom";
 import YouTube from "react-youtube";
 import { useMovieDetails } from "../../hooks/hooks";
+import PageTitle from "@/components/PageTitle/PageTitle";
 
 const MoviePage = () => {
   const { id } = useParams<{ id: string }>();
@@ -15,6 +16,7 @@ const MoviePage = () => {
 
   return (
     <>
+      <PageTitle title={movie.title} />
       <div className={styles.hero}>
         <img
           src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}

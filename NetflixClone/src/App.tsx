@@ -9,6 +9,7 @@ import { RootLayout } from "./components/layout/RootLayout";
 import SearchResultsPage from "./components/pages/SearchResultsPage/SearchResultsPage";
 import MoviesByRatingPage from "./components/pages/MoviesByRatingPage/MoviesByRatingPage";
 import MoviesByYearPage from "./components/pages/MoviesByYearPage/MoviesByYearPage";
+import { HelmetProvider } from "react-helmet-async";
 
 const router = createBrowserRouter([
   {
@@ -33,9 +34,11 @@ const router = createBrowserRouter([
 
 const App = () => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-    </QueryClientProvider>
+    <HelmetProvider>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    </HelmetProvider>
   );
 };
 

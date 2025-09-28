@@ -4,6 +4,7 @@ import { useMoviesByRating } from "../../hooks/hooks";
 import MovieCardList from "@/components/MovieCardList/MovieCardList";
 import Banner from "@/components/Banner/Banner";
 import ContentFilter from "@/components/ContentFilter/ContentFilter";
+import PageTitle from "@/components/PageTitle/PageTitle";
 
 const MoviesByRatingPage = () => {
   const { rating } = useParams<{ rating: string }>();
@@ -15,6 +16,7 @@ const MoviesByRatingPage = () => {
 
   return (
     <>
+    <PageTitle title={rating}/>
       <Banner />
       <div className={styles.wrapper}>
         <ContentFilter selectedFilter={rating} />
