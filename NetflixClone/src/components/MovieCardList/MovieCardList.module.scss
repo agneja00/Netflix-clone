@@ -1,0 +1,36 @@
+.list {
+  &__title {
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    padding-bottom: 0.7rem;
+    margin: 1.5rem 0;
+    font-weight: 700;
+    color: $netflix-red-color;
+    border-bottom: 1px solid $netflix-red-color;
+  }
+
+  &__posters {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
+    cursor: pointer;
+
+    @include respond-to("md") {
+      grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+    }
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .loading {
+    color: $secondary-color;
+    @include loading-and-error;
+  }
+
+  .error {
+    color: $netflix-red-color;
+    @include loading-and-error;
+  }
+}

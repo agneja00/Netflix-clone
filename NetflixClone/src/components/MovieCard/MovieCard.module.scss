@@ -1,0 +1,43 @@
+.card {
+  background: #181818;
+  border-radius: 0.4rem;
+  transition: transform 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: $secondary-color;
+
+  &:hover {
+    color: $netflix-red-color;
+    transform: translateY(-0.5rem);
+  }
+
+  &__image {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    display: block;
+  }
+
+  &__title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  &__details {
+    padding: 0.8rem;
+    text-align: center;
+  }
+
+  &__type {
+    margin-top: 0.3rem;
+    font-size: 0.8rem;
+    color: #aaa;
+
+    @include respond-to("md") {
+      font-size: 0.9rem;
+    }
+  }
+}

@@ -1,0 +1,82 @@
+.moviePage {
+  color: $secondary-color;
+  padding: 2rem;
+
+  &__content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-top: 2rem;
+
+    &__poster {
+      max-width: 18.75rem;
+      border-radius: 0.5rem;
+    }
+  }
+
+  &__details {
+    flex: 1;
+
+    &__title,
+    &__paragraph {
+      margin: 1rem 0 0.5rem;
+    }
+
+    &__title {
+      color: $netflix-red-color;
+    }
+
+    &__paragraph {
+      line-height: 1.6;
+    }
+
+    &__list {
+      list-style: none;
+      padding: 0;
+
+      &__link {
+        display: inline-block;
+        background: #333;
+        padding: 0.4rem 0.8rem;
+        margin-right: 0.5rem;
+        border-radius: 0.4rem;
+      }
+    }
+  }
+}
+
+.hero {
+  position: relative;
+  text-align: center;
+
+  &__backdrop {
+    width: 100%;
+    max-height: 25rem;
+    object-fit: cover;
+  }
+
+  &__title {
+    position: absolute;
+    bottom: 0.7rem;
+    left: 0.8rem;
+    font-size: 1rem;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 0.5rem 1rem;
+    color: $secondary-color;
+
+    @include respond-to("md") {
+      font-size: 2rem;
+    }
+  }
+}
+
+.trailer {
+  margin-top: 2rem;
+}
+
+.loading,
+.error {
+  text-align: center;
+  font-size: 1.2rem;
+  color: $secondary-color;
+}

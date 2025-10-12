@@ -1,0 +1,30 @@
+@use "sass:map";
+
+$primary-color: rgb(0, 0, 0);
+$secondary-color: rgb(255, 255, 255);
+$netflix-red-color: rgb(229, 9, 20);
+
+@mixin loading-and-error {
+  padding: 1.25rem;
+  text-align: center;
+}
+
+$breakpoints: (
+  "sm": 576px,
+  "md": 768px,
+  "lg": 992px,
+  "xl": 1200px,
+  "xxl": 1400px,
+);
+
+@mixin respond-to($breakpoint) {
+  $width: map.get($breakpoints, $breakpoint);
+
+  @if not $width {
+    @error "Breakpoint '#{$breakpoint}' not found in $breakpoints map.";
+  }
+
+  @media (min-width: $width) {
+    @content;
+  }
+}
