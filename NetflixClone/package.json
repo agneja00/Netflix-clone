@@ -13,8 +13,7 @@
     "lint:fix": "eslint . --ext ts,tsx --fix",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
-    "check": "yarn type-check && yarn lint",
-    "prepare": "husky install"
+    "check": "yarn type-check && yarn lint"
   },
   "dependencies": {
     "@babel/preset-typescript": "^7.27.1",
