@@ -22,7 +22,7 @@ const Nav = () => {
   const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && searchQuery.trim()) {
       navigate(
-        `${ROUTES.MOVIE_SEARCH}?query=${encodeURIComponent(searchQuery.trim())}`,
+        `${ROUTES.MOVIE_SEARCH}?query=${encodeURIComponent(searchQuery.trim())}`
       );
       setShowInput(false);
       setSearchQuery("");
@@ -47,6 +47,8 @@ const Nav = () => {
         className={styles.nav__logo}
         src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/1200px-Netflix_2015_logo.svg.png"
         alt="Netflix Logo"
+        width={120}
+        height={40}
         onClick={(e) => {
           e.stopPropagation();
           navigate(ROUTES.HOME);
@@ -57,24 +59,28 @@ const Nav = () => {
         className={styles.rightContainer}
         onClick={(e) => e.stopPropagation()}
       >
-        {showInput ? (
-          <SearchInput
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            onKeyDown={handleSearch}
-            placeholder="Search for movies, shows, and more..."
-          />
-        ) : (
-          <FaSearch
-            className={styles.nav__searchButton}
-            onClick={toggleSearch}
-            data-testid="search-icon"
-          />
-        )}
+        <div className={styles.nav__search}>
+          {showInput ? (
+            <SearchInput
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={handleSearch}
+              placeholder="Search for movies, shows, and more..."
+            />
+          ) : (
+            <FaSearch
+              className={styles.nav__searchButton}
+              onClick={toggleSearch}
+              data-testid="search-icon"
+            />
+          )}
+        </div>
         <img
           className={styles.nav__avatar}
           src="https://wallpapers.com/images/hd/netflix-profile-pictures-1000-x-1000-qo9h82134t9nv0j0.jpg"
           alt="Netflix Profile"
+          width={30}
+          height={30}
         />
       </div>
     </header>
