@@ -13,7 +13,9 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.2.4"
   },
-  "workspaces": ["NetflixClone"],
+  "workspaces": [
+    "NetflixClone"
+  ],
   "lint-staged": {
     "*.{js,ts,tsx,json,css,scss,md,yml,yaml}": [
       "yarn lint:fix",
