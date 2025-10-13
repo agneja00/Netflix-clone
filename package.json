@@ -10,9 +10,10 @@
     "prepare": "husky install"
   },
   "devDependencies": {
-    "husky": "^9.1.7"
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.4"
   },
   "workspaces": [
-    "NetflixClone"
+    "netflixclone"
   ]
 }
