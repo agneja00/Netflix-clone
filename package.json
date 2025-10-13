@@ -6,8 +6,7 @@
     "dev": "cd NetflixClone && yarn dev",
     "build": "cd NetflixClone && yarn build",
     "test": "cd NetflixClone && yarn test",
-    "lint": "cd NetflixClone && yarn lint",
-    "prepare": "husky install"
+    "lint": "cd NetflixClone && yarn lint"
   },
   "devDependencies": {
     "husky": "^9.1.7",

@@ -1,2 +1,6 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
 cd NetflixClone
-yarn lint
+yarn lint:fix
+yarn format:fix
