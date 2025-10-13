@@ -19,7 +19,7 @@ const MoviesByYearPage = () => {
 
   return (
     <>
-    <PageTitle title={year} />
+      <PageTitle title={year} />
       <Banner />
       <div className={styles.wrapper}>
         <ContentFilter selectedFilter={year} />

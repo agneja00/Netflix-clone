@@ -4,11 +4,11 @@ A modern and responsive movie browsing app built with **React**, **Vite**, **Typ
 
 ### Features
 
-- Browse **Trending** and **Top Rated** movies  
-- Explore all movie categories  
-- Search for movies  
-- View detailed movie information including trailers  
-- Enjoy a **responsive design** optimized for all devices  
+- Browse **Trending** and **Top Rated** movies
+- Explore all movie categories
+- Search for movies
+- View detailed movie information including trailers
+- Enjoy a **responsive design** optimized for all devices
 - Tested using **Jest** and **React Testing Library**
 
 ### Links

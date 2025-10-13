@@ -16,7 +16,7 @@ const MoviesByRatingPage = () => {
 
   return (
     <>
-    <PageTitle title={rating}/>
+      <PageTitle title={rating} />
       <Banner />
       <div className={styles.wrapper}>
         <ContentFilter selectedFilter={rating} />
