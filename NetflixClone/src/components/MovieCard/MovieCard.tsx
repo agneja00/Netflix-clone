@@ -13,11 +13,12 @@ const MovieCard = ({ movie, showType = false }: MovieCardProps) => {
   if (!movie) return null;
 
   const imagePath = movie.poster_path || movie.backdrop_path;
-  const imageUrl = imagePath
-    ? `${API_CONFIG.TMDB.IMAGE_BASE}${imagePath}`
-    : "/placeholder-movie.png";
-
   const title = movie.title || movie.name || movie.original_title || "Unknown";
+
+  const base = API_CONFIG.TMDB.IMAGE_BASE.replace("/original/", "/");
+  const imageUrl = imagePath
+    ? `${base}w342${imagePath}`
+    : "/placeholder-movie.png";
 
   return (
     <Link
@@ -28,6 +29,12 @@ const MovieCard = ({ movie, showType = false }: MovieCardProps) => {
       <div className={styles.imageContainer}>
         <img
           src={imageUrl}
+          srcSet={`
+            ${base}w185${imagePath} 185w,
+            ${base}w342${imagePath} 342w,
+            ${base}w500${imagePath} 500w
+          `}
+          sizes="(max-width: 600px) 185px, (max-width: 1200px) 342px, 500px"
           alt={title}
           className={styles.card__image}
           loading="lazy"

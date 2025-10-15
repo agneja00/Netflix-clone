@@ -18,15 +18,20 @@ const Banner = () => {
       </div>
     );
 
+  const base = API_CONFIG.TMDB.IMAGE_BASE.replace("/original/", "/");
+  const imagePath = featuredMovie?.backdrop_path || featuredMovie?.poster_path;
+
+  const bgImage = imagePath
+    ? `${base}w1280${imagePath}`
+    : "linear-gradient(to right, #111, #555)";
+
   return (
     <div className={styles.banner} data-testid="banner">
       <div
         className={styles.banner__background}
         data-testid="banner-background"
         style={{
-          backgroundImage: featuredMovie?.backdrop_path
-            ? `url("${API_CONFIG.TMDB.IMAGE_BASE}${featuredMovie.backdrop_path}")`
-            : "linear-gradient(to right, #111, #555)",
+          backgroundImage: `url("${bgImage}")`,
         }}
       />
       <div className={styles.banner__contents}>
@@ -35,12 +40,12 @@ const Banner = () => {
             featuredMovie?.name ||
             featuredMovie?.original_title}
         </h1>
-        <h1
+        <p
           className={styles.banner__description}
           data-testid="banner-description"
         >
           {featuredMovie?.overview}
-        </h1>
+        </p>
       </div>
     </div>
   );
