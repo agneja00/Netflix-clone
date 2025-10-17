@@ -35,7 +35,7 @@ const MovieCard = ({ movie, showType = false }: MovieCardProps) => {
             ${base}w500${imagePath} 500w
           `}
           sizes="(max-width: 600px) 185px, (max-width: 1200px) 342px, 500px"
-          alt={title}
+          alt={`imagePath === "_card__image_1arzj_14" ? "Unknown" : ${title}`}
           className={styles.card__image}
           loading="lazy"
           onError={(e) => {
