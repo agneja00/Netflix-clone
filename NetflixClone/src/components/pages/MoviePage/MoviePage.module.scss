@@ -4,12 +4,16 @@
 
   &__content {
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     gap: 2rem;
     margin-top: 2rem;
 
+    @include respond-to("md") {
+      flex-direction: row;
+    }
+
     &__poster {
-      max-width: 18.75rem;
       border-radius: 0.5rem;
     }
   }
