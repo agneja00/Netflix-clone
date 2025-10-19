@@ -22,7 +22,7 @@ const Nav = () => {
   const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && searchQuery.trim()) {
       navigate(
-        `${ROUTES.MOVIE_SEARCH}?query=${encodeURIComponent(searchQuery.trim())}`,
+        `${ROUTES.MOVIE_SEARCH}?query=${encodeURIComponent(searchQuery.trim())}`
       );
       setShowInput(false);
       setSearchQuery("");
@@ -45,7 +45,7 @@ const Nav = () => {
     >
       <img
         className={styles.nav__logo}
-        src="../assets/Netflix_nav_logo.png"
+        src="../assets/Netflix_Nav_Logo.png"
         alt="Netflix Logo"
         width={120}
         height={40}
