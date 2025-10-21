@@ -32,5 +32,5 @@ A modern and responsive movie browsing app built with **React**, **Vite**, **Typ
 - Website - [Agnieska Jackevic] (https://web-portfolio-agneja00.vercel.app/)
 - Linkedin - [Agnieska Jackevic] (https://www.linkedin.com/in/agnieska-jackevic/)
 
-![Screenshot](./assets/netflix_app_desktop.png)
-![Screenshot](./assets/netflix_app_mobile.png)
+![Screenshot](./public/assets/netflix_app_desktop.png)
+![Screenshot](./public/assets/netflix_app_mobile.png)
