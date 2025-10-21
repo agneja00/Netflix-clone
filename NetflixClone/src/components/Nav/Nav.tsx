@@ -45,7 +45,7 @@ const Nav = () => {
     >
       <img
         className={styles.nav__logo}
-        src="./assets/Netflix_nav_logo.png"
+        src="./assets/Netflix_app_nav_logo.png"
         alt="Netflix Logo"
         width={120}
         height={40}
