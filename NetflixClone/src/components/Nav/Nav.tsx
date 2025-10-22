@@ -77,7 +77,7 @@ const Nav = () => {
         </div>
         <img
           className={styles.nav__avatar}
-          src="https://wallpapers.com/images/hd/netflix-profile-pictures-1000-x-1000-qo9h82134t9nv0j0.jpg"
+          src="../assets/netflix_profile_picture.jpg"
           alt="Netflix Profile"
           width={30}
           height={30}
