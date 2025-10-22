@@ -45,10 +45,8 @@ const Nav = () => {
     >
       <img
         className={styles.nav__logo}
-        src="../assets/Netflix_app_nav_logo.png"
+        src="../assets/Netflix_app_nav_logo.webp"
         alt="Netflix Logo"
-        width={120}
-        height={40}
         onClick={(e) => {
           e.stopPropagation();
           navigate(ROUTES.HOME);
@@ -77,10 +75,8 @@ const Nav = () => {
         </div>
         <img
           className={styles.nav__avatar}
-          src="../assets/netflix_profile_picture.jpg"
+          src="../assets/netflix_profile_picture.webp"
           alt="Netflix Profile"
-          width={30}
-          height={30}
         />
       </div>
     </header>
