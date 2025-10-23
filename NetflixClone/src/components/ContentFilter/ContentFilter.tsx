@@ -11,10 +11,7 @@ interface FilterProps {
   className?: string;
 }
 
-const ContentFilter: React.FC<FilterProps> = ({
-  selectedFilter,
-  className,
-}) => {
+const ContentFilter: React.FC<FilterProps> = ({ selectedFilter }) => {
   const [activeFilterType, setActiveFilterType] = useState<FilterType>("genre");
   const { data: genres = [], isLoading: isLoadingGenres } = useGenres();
   const navigate = useNavigate();
@@ -85,7 +82,7 @@ const ContentFilter: React.FC<FilterProps> = ({
   };
 
   return (
-    <div className={`${styles.filterContainer} ${className}`}>
+    <div className={styles.filterContainer}>
       <span className={styles.filterLabel}>Filter by:</span>
 
       <button
