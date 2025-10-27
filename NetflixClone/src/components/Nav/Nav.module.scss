@@ -15,8 +15,6 @@
   }
 
   &__logo {
-    width: 5rem;
-    aspect-ratio: auto;
     cursor: pointer;
   }
 
@@ -33,10 +31,7 @@
   }
 
   &__avatar {
-    width: 1.875rem;
-    aspect-ratio: 1 / 1;
-    border-radius: 4px;
-    height: auto;
+    border-radius: 0.25rem;
     cursor: pointer;
   }
 }
