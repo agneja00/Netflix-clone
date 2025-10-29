@@ -22,7 +22,7 @@ const Nav = () => {
   const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && searchQuery.trim()) {
       navigate(
-        `${ROUTES.MOVIE_SEARCH}?query=${encodeURIComponent(searchQuery.trim())}`
+        `${ROUTES.MOVIE_SEARCH}?query=${encodeURIComponent(searchQuery.trim())}`,
       );
       setShowInput(false);
       setSearchQuery("");

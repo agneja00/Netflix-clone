@@ -1,23 +1,19 @@
 .banner {
   position: relative;
   height: 26rem;
+  overflow: hidden;
 
   @include respond-to("md") {
     height: 32rem;
   }
 
-  &__background {
+  &__image {
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-
-    @include respond-to("md") {
-      background-size: cover;
-    }
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   &__contents {
@@ -27,24 +23,29 @@
     justify-content: flex-end;
     height: 100%;
     padding: 0 1.5rem;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.65) 0%,
+      rgba(0, 0, 0, 0) 60%
+    );
   }
 
   &__title {
     color: $netflix-red-color;
-    align-self: flex-start;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 800;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 
     @include respond-to("md") {
-      font-size: 2rem;
+      font-size: 1.9rem;
     }
   }
 
   &__description {
     color: $secondary-color;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     text-align: justify;
+    margin-top: 0.25rem;
     padding-bottom: 1rem;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
 

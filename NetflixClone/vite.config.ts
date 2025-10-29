@@ -12,7 +12,7 @@ export default defineConfig(({ mode }) => {
       react(),
       tsconfigPaths(),
       legacy({
-        targets: ["defaults", "IE 11"],
+        targets: ["defaults", "not IE 11"],
         additionalLegacyPolyfills: ["regenerator-runtime/runtime"],
         renderLegacyChunks: true,
         modernPolyfills: true,
@@ -34,11 +34,23 @@ export default defineConfig(({ mode }) => {
     build: {
       outDir: "dist",
       emptyOutDir: true,
-      chunkSizeWarningLimit: 1600,
+      chunkSizeWarningLimit: 600,
+      minify: "esbuild",
+      target: "esnext",
+      cssCodeSplit: true,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            react: ["react", "react-dom"],
+            router: ["react-router-dom"],
+            query: ["@tanstack/react-query"],
+          },
+        },
+      },
     },
     define: {
       "import.meta.env.VITE_TMDB_API_KEY": JSON.stringify(
-        env.VITE_TMDB_API_KEY,
+        env.VITE_TMDB_API_KEY
       ),
     },
     server: {

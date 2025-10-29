@@ -22,7 +22,7 @@ const MovieCard = ({
 
   const base = API_CONFIG.TMDB.IMAGE_BASE.replace("/original/", "/");
   const imageUrl = imagePath
-    ? `${base}w342${imagePath}`
+    ? `${base}w185${imagePath}`
     : "/placeholder-movie.png";
 
   return (
@@ -38,14 +38,17 @@ const MovieCard = ({
           <img
             src={imageUrl}
             srcSet={`
-            ${base}w185${imagePath} 185w,
-            ${base}w342${imagePath} 342w,
-            ${base}w500${imagePath} 500w
-          `}
-            sizes="(max-width: 600px) 185px, (max-width: 1200px) 342px, 500px"
+              ${base}w154${imagePath} 154w,
+              ${base}w185${imagePath} 185w,
+              ${base}w342${imagePath} 342w
+            `}
+            sizes="(max-width: 600px) 140px, (max-width: 1200px) 213px, 213px"
+            width={213}
+            height={319}
             alt={`imagePath === "_card__image_1arzj_14" ? "Unknown" : ${title}`}
             className={styles.card__image}
             loading="lazy"
+            decoding="async"
             onError={(e) => {
               (e.target as HTMLImageElement).src = "/placeholder-movie.png";
             }}
