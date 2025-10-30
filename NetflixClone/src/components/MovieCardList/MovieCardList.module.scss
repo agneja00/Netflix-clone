@@ -25,12 +25,34 @@
   }
 
   .loading {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
+    min-height: 20rem;
     color: $secondary-color;
-    @include loading-and-error;
+
+    @include respond-to("md") {
+      grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+    }
   }
 
   .error {
     color: $netflix-red-color;
-    @include loading-and-error;
+    text-align: center;
+    padding: 2rem 0;
+  }
+}
+
+.skeletonCard {
+  aspect-ratio: 2 / 3;
+  border-radius: 0.4rem;
+  background: linear-gradient(90deg, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite linear;
+}
+
+@keyframes shimmer {
+  100% {
+    background-position: -200% 0;
   }
 }

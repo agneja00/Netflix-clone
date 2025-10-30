@@ -34,9 +34,13 @@ const MovieCardList: React.FC<MovieCardListProps> = ({
     <>
       <h2 className={styles.list__title}>{category}</h2>
       <div className={styles.list__posters}>
-        {movies.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} showType={showType} />
-        ))}
+        {isLoading
+          ? Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} className={styles.skeletonCard}></div>
+            ))
+          : movies.map((movie) => (
+              <MovieCard key={movie.id} movie={movie} showType={showType} />
+            ))}
       </div>
     </>
   );
