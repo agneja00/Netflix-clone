@@ -18,7 +18,7 @@ const HomePage = () => {
   ];
 
   const allLoaded = categories.every(({ url }) =>
-    queryClient.getQueryData(["movies", url])
+    queryClient.getQueryData(["movies", url]),
   );
 
   return (

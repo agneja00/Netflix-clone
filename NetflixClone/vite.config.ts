@@ -50,7 +50,7 @@ export default defineConfig(({ mode }) => {
     },
     define: {
       "import.meta.env.VITE_TMDB_API_KEY": JSON.stringify(
-        env.VITE_TMDB_API_KEY
+        env.VITE_TMDB_API_KEY,
       ),
     },
     server: {
