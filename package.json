@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "cd NetflixClone && yarn dev",
     "build": "cd NetflixClone && yarn build",
+    "preview": "cd NetflixClone && yarn preview",
     "test": "cd NetflixClone && yarn test",
     "lint": "cd NetflixClone && yarn lint"
   },
