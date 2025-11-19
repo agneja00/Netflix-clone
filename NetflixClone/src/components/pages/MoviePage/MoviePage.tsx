@@ -1,9 +1,10 @@
 import styles from "./MoviePage.module.scss";
-import { useParams } from "react-router-dom";
+import { generatePath, Link, useParams } from "react-router-dom";
 import YouTube from "react-youtube";
 import { useMovieDetails } from "../../hooks/hooks";
 import PageTitle from "@/components/PageTitle/PageTitle";
 import { API_CONFIG } from "@/config/constants";
+import { ROUTES } from "@/constants/routes";
 
 const MoviePage = () => {
   const { id } = useParams<{ id: string }>();
@@ -60,12 +61,15 @@ const MoviePage = () => {
                 <h3 className={styles.moviePage__details__title}>Genres</h3>
                 <ul className={styles.moviePage__details__list}>
                   {movie.genres.map((genre) => (
-                    <li
+                    <Link
                       key={genre.id}
                       className={styles.moviePage__details__list__link}
+                      to={generatePath(ROUTES.MOVIES_BY_GENRE, {
+                        genre: genre.name,
+                      })}
                     >
                       {genre.name}
-                    </li>
+                    </Link>
                   ))}
                 </ul>
               </>

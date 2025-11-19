@@ -40,10 +40,16 @@
 
       &__link {
         display: inline-block;
+        text-decoration: none;
+        color: $secondary-color;
         background: #333;
         padding: 0.4rem 0.8rem;
         margin-right: 0.5rem;
         border-radius: 0.4rem;
+
+        &:hover {
+          background-color: rgba($secondary-color, 0.1);
+        }
       }
     }
   }
