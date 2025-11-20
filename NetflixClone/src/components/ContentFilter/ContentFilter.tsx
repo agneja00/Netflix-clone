@@ -1,42 +1,34 @@
 import styles from "./ContentFilter.module.scss";
 import { useGenres } from "../hooks/hooks";
-import { useNavigate } from "react-router-dom";
+import { generatePath, useParams } from "react-router-dom";
 import { ROUTES } from "@/constants/routes";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import FilterLink from "../FilterLink/FilterLink";
 
-type FilterType = "genre" | "year" | "rating";
+type FilterType = "all" | "genre" | "year" | "rating";
 
 interface FilterProps {
   selectedFilter: string | null;
-  className?: string;
 }
 
 const ContentFilter: React.FC<FilterProps> = ({ selectedFilter }) => {
-  const [activeFilterType, setActiveFilterType] = useState<FilterType>("genre");
   const { data: genres = [], isLoading: isLoadingGenres } = useGenres();
-  const navigate = useNavigate();
+  const params = useParams<{
+    genre?: string;
+    year?: string;
+    rating?: string;
+  }>();
+  const [activeFilterType, setActiveFilterType] = useState<FilterType>("all");
+
+  useEffect(() => {
+    if (params.genre) setActiveFilterType("genre");
+    else if (params.year) setActiveFilterType("year");
+    else if (params.rating) setActiveFilterType("rating");
+    else setActiveFilterType("all");
+  }, [params.genre, params.year, params.rating]);
 
   const years = Array.from({ length: 15 }, (_, i) => 2024 - i);
   const ratings = Array.from({ length: 9 }, (_, i) => 9 - i);
-
-  const handleFilterSelection = (value: string | null) => {
-    if (!value || value === "All") {
-      navigate(ROUTES.HOME);
-      return;
-    }
-
-    switch (activeFilterType) {
-      case "genre":
-        navigate(ROUTES.MOVIES_BY_GENRE.replace(":genre", value));
-        break;
-      case "year":
-        navigate(ROUTES.MOVIES_BY_YEAR.replace(":year", value));
-        break;
-      case "rating":
-        navigate(ROUTES.MOVIES_BY_RATING.replace(":rating", value));
-        break;
-    }
-  };
 
   const renderFilterButtons = () => {
     if (isLoadingGenres && activeFilterType === "genre") {
@@ -45,83 +37,91 @@ const ContentFilter: React.FC<FilterProps> = ({ selectedFilter }) => {
 
     switch (activeFilterType) {
       case "genre":
-        return genres.map((genre) => (
-          <button
-            key={genre.id}
-            className={
-              selectedFilter === genre.name.toLowerCase() ? styles.active : ""
-            }
-            onClick={() => handleFilterSelection(genre.name.toLowerCase())}
+        return genres.map((g) => (
+          <FilterLink
+            key={g.id}
+            active={selectedFilter === g.name.toLowerCase()}
+            to={generatePath(ROUTES.MOVIES_BY_GENRE, {
+              genre: g.name.toLowerCase(),
+            })}
           >
-            {genre.name}
-          </button>
+            {g.name}
+          </FilterLink>
         ));
+
       case "year":
-        return years.map((year) => (
-          <button
-            key={year}
-            className={selectedFilter === year.toString() ? styles.active : ""}
-            onClick={() => handleFilterSelection(year.toString())}
+        return years.map((y) => (
+          <FilterLink
+            key={y}
+            active={selectedFilter === y.toString()}
+            to={generatePath(ROUTES.MOVIES_BY_YEAR, { year: y.toString() })}
           >
-            {year}
-          </button>
+            {y}
+          </FilterLink>
         ));
+
       case "rating":
-        return ratings.map((rating) => (
-          <button
-            key={rating}
-            className={
-              selectedFilter === rating.toString() ? styles.active : ""
-            }
-            onClick={() => handleFilterSelection(rating.toString())}
+        return ratings.map((r) => (
+          <FilterLink
+            key={r}
+            active={selectedFilter === r.toString()}
+            to={generatePath(ROUTES.MOVIES_BY_RATING, {
+              rating: r.toString(),
+            })}
           >
-            {rating}+
-          </button>
+            {r}+
+          </FilterLink>
         ));
+
+      case "all":
+        return null;
     }
   };
 
   return (
-    <div className={styles.filterContainer}>
-      <span className={styles.filterLabel}>Filter by:</span>
+    <>
+      <div className={styles.filterContainer}>
+        <span className={styles.filterLabel}>Filter by:</span>
 
-      <button
-        className={`${styles.filterTypeSelector} ${
-          activeFilterType === "genre" ? styles.active : ""
-        }`}
-        onClick={() => setActiveFilterType("genre")}
-      >
-        Genre
-      </button>
-
-      <button
-        className={`${styles.filterTypeSelector} ${
-          activeFilterType === "year" ? styles.active : ""
-        }`}
-        onClick={() => setActiveFilterType("year")}
-      >
-        Year
-      </button>
-
-      <button
-        className={`${styles.filterTypeSelector} ${
-          activeFilterType === "rating" ? styles.active : ""
-        }`}
-        onClick={() => setActiveFilterType("rating")}
-      >
-        Rating
-      </button>
-
-      <div className={styles.filterOptions}>
         <button
-          className={!selectedFilter ? styles.active : ""}
-          onClick={() => handleFilterSelection(null)}
+          className={`${styles.filterTypeSelector} ${
+            activeFilterType === "genre" ? styles.filterTypeActive : ""
+          }`}
+          onClick={() => setActiveFilterType("genre")}
+        >
+          Genre
+        </button>
+
+        <button
+          className={`${styles.filterTypeSelector} ${
+            activeFilterType === "year" ? styles.filterTypeActive : ""
+          }`}
+          onClick={() => setActiveFilterType("year")}
+        >
+          Year
+        </button>
+
+        <button
+          className={`${styles.filterTypeSelector} ${
+            activeFilterType === "rating" ? styles.filterTypeActive : ""
+          }`}
+          onClick={() => setActiveFilterType("rating")}
+        >
+          Rating
+        </button>
+      </div>
+
+      <div className={styles.filterOptionsContainer}>
+        <FilterLink
+          to={ROUTES.HOME}
+          active={!params.genre && !params.year && !params.rating}
         >
           All
-        </button>
+        </FilterLink>
+
         {renderFilterButtons()}
       </div>
-    </div>
+    </>
   );
 };
 

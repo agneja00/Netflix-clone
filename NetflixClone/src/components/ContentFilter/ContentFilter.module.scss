@@ -1,8 +1,5 @@
 .filterContainer {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.75rem;
+  @include filter-type-and-filter-options-container;
 
   .filterLabel {
     color: $secondary-color;
@@ -10,68 +7,19 @@
   }
 
   .filterTypeSelector {
-    background-color: transparent;
-    border: 1px solid $secondary-color;
-    color: $secondary-color;
-    padding: 0.4rem 0.8rem;
-    cursor: pointer;
-    border-radius: 0.25rem;
-    transition: all 0.3s ease;
-    font-size: 0.875rem;
-
-    &:hover {
-      background-color: rgba($secondary-color, 0.1);
-    }
-
-    &.active {
-      background-color: $netflix-red-color;
-      border-color: $netflix-red-color;
-      color: $secondary-color;
-    }
+    @include filter-selector-and-link;
   }
 
-  .filterOptions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.7rem;
-    width: 100%;
-
-    button {
-      background-color: rgba($secondary-color, 0.1);
-      border: 1px solid $secondary-color;
-      color: $secondary-color;
-      padding: 0.4rem 0.8rem;
-      border-radius: 0.25rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-size: 0.875rem;
-
-      &:hover {
-        background-color: rgba($secondary-color, 0.2);
-      }
-
-      &.active {
-        background-color: $netflix-red-color;
-        border-color: $netflix-red-color;
-      }
-
-      &:first-child {
-        font-weight: 600;
-      }
-    }
-
-    @include respond-to("md") {
-      gap: 1rem;
-    }
+  .filterTypeActive {
+    @include filter-selector-and-link-active;
   }
+}
 
-  @include respond-to("md") {
-    gap: 1rem;
-    padding: 1rem 0;
+.filterOptionsContainer {
+  @include filter-type-and-filter-options-container;
 
-    .filterTypeSelector {
-      padding: 0.5rem 1rem;
-    }
+  .filterTypeSelector {
+    padding: 0.5rem 1rem;
   }
 }
 

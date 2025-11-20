@@ -3,10 +3,14 @@
     font-size: 1.4rem;
     text-transform: uppercase;
     padding-bottom: 0.7rem;
-    margin: 1.5rem 0;
+    margin: 0.5rem 0;
     font-weight: 700;
     color: $netflix-red-color;
     border-bottom: 1px solid $netflix-red-color;
+
+    @include respond-to("md") {
+      margin: 0;
+    }
   }
 
   &__posters {

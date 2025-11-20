@@ -4,11 +4,6 @@ $primary-color: rgb(0, 0, 0);
 $secondary-color: rgb(255, 255, 255);
 $netflix-red-color: rgb(229, 9, 20);
 
-@mixin loading-and-error {
-  padding: 1.25rem;
-  text-align: center;
-}
-
 $breakpoints: (
   "sm": 576px,
   "md": 768px,
@@ -27,4 +22,46 @@ $breakpoints: (
   @media (min-width: $width) {
     @content;
   }
+}
+
+@mixin filter-type-and-filter-options-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.8rem;
+
+  @include respond-to("md") {
+    gap: 1rem;
+    margin: 0.5rem 0;
+  }
+}
+
+@mixin filter-selector-and-link {
+  display: inline-block;
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: $secondary-color;
+  background: #333;
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 0.4rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(178, 176, 176, 0.716);
+  }
+
+  @include respond-to("md") {
+    font-size: 1rem;
+  }
+}
+
+@mixin filter-selector-and-link-active {
+  background-color: $netflix-red-color;
+  font-weight: 600;
+}
+
+@mixin loading-and-error {
+  padding: 1.25rem;
+  text-align: center;
 }
