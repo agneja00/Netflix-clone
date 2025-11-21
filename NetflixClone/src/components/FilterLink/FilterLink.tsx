@@ -16,7 +16,7 @@ const FilterLink = ({ active, to, className, children }: FilterLinkProps) => {
       className={classNames(
         styles.link,
         className,
-        active && styles.filterLinkActive
+        active && styles.filterLinkActive,
       )}
       to={to}
     >
