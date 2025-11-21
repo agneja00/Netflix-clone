@@ -10,10 +10,14 @@ interface FilterLinkProps {
   children: React.ReactNode;
 }
 
-const FilterLink = ({ active, to, children }: FilterLinkProps) => {
+const FilterLink = ({ active, to, className, children }: FilterLinkProps) => {
   return (
     <Link
-      className={classNames(styles.link, active && styles.filterLinkActive)}
+      className={classNames(
+        styles.link,
+        className,
+        active && styles.filterLinkActive
+      )}
       to={to}
     >
       {children}
