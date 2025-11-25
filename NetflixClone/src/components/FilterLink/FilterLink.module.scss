@@ -1,7 +1,7 @@
-.link {
+.filterLink {
   @include filter-selector-and-link;
-}
 
-.filterLinkActive {
-  @include filter-selector-and-link-active;
+  &--active {
+    @include filter-selector-and-link-active;
+  }
 }

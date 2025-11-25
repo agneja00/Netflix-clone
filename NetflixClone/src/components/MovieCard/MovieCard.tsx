@@ -31,9 +31,9 @@ const MovieCard = ({
       className={styles.card}
       aria-label={`View details for ${title}`}
     >
-      <div className={styles.imageContainer}>
+      <div className={styles.card__imageContainer}>
         {isLoading ? (
-          <div className={styles.skeleton} />
+          <div className={styles.card__skeleton} />
         ) : (
           <img
             src={imageUrl}

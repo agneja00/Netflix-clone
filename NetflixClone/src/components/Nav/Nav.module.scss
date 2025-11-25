@@ -10,7 +10,7 @@
   justify-content: space-between;
   align-items: center;
 
-  &__black {
+  &--black {
     background-color: rgb(26, 25, 25);
   }
 
@@ -34,10 +34,10 @@
     border-radius: 0.25rem;
     cursor: pointer;
   }
-}
 
-.rightContainer {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+  &__rightContainer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
 }

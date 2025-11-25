@@ -22,7 +22,7 @@ const Nav = () => {
   const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && searchQuery.trim()) {
       navigate(
-        `${ROUTES.MOVIE_SEARCH}?query=${encodeURIComponent(searchQuery.trim())}`,
+        `${ROUTES.MOVIE_SEARCH}?query=${encodeURIComponent(searchQuery.trim())}`
       );
       setShowInput(false);
       setSearchQuery("");
@@ -40,7 +40,7 @@ const Nav = () => {
 
   return (
     <header
-      className={`${styles.nav} ${show ? styles.nav__black : ""}`}
+      className={`${styles.nav} ${show ? styles["nav--black"] : ""}`}
       onClick={() => setShowInput(false)}
     >
       <img
@@ -56,7 +56,7 @@ const Nav = () => {
       />
 
       <div
-        className={styles.rightContainer}
+        className={styles.nav__rightContainer}
         onClick={(e) => e.stopPropagation()}
       >
         <div className={styles.nav__search}>
@@ -75,6 +75,7 @@ const Nav = () => {
             />
           )}
         </div>
+
         <img
           className={styles.nav__avatar}
           src="../assets/netflix_profile_picture@2x.webp"

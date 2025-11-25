@@ -13,7 +13,7 @@ const MoviesByGenrePage = () => {
 
   const fetchUrl = genre ? getGenreFetchUrl(genre, genres) : null;
   const selectedGenre = genres.find(
-    (g) => g.name.toLowerCase() === genre?.toLowerCase(),
+    (g) => g.name.toLowerCase() === genre?.toLowerCase()
   );
 
   const {
@@ -23,21 +23,27 @@ const MoviesByGenrePage = () => {
   } = useMovies(fetchUrl || "", { enabled: !!fetchUrl });
 
   if (isGenresLoading)
-    return <div className={styles.loading}>Loading genres...</div>;
-  if (!genre) return <div className={styles.error}>No genre selected</div>;
+    return <div className={styles.page__loading}>Loading genres...</div>;
+
+  if (!genre)
+    return <div className={styles.page__error}>No genre selected</div>;
+
   if (!selectedGenre && !fetchUrl)
-    return <div className={styles.error}>Genre not found</div>;
-  if (error) return <div className={styles.error}>Error loading movies</div>;
+    return <div className={styles.page__error}>Genre not found</div>;
+
+  if (error)
+    return <div className={styles.page__error}>Error loading movies</div>;
 
   return (
     <>
       <PageTitle title={selectedGenre?.name} />
       <Banner />
-      <div className={styles.wrapper}>
+
+      <div className={styles.page__wrapper}>
         <ContentFilter selectedFilter={genre.toLowerCase()} />
 
         {isMoviesLoading ? (
-          <div className={styles.loading}>Loading movies...</div>
+          <div className={styles.page__loading}>Loading movies...</div>
         ) : (
           <>
             <MovieCardList
@@ -45,7 +51,7 @@ const MoviesByGenrePage = () => {
               movies={movies}
             />
             {!movies.length && (
-              <div className={styles.noResults}>
+              <div className={styles.page__noResults}>
                 No movies found for this genre
               </div>
             )}

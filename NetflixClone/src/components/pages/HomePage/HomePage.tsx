@@ -26,7 +26,7 @@ const HomePage = () => {
       <PageTitle title="Home" />
       <Banner />
       <div
-        className={styles.wrapper}
+        className={styles.page__wrapper}
         style={!allLoaded ? { minHeight: "220vh" } : undefined}
       >
         <ContentFilter selectedFilter={null} />

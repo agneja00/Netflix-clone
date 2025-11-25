@@ -11,27 +11,27 @@
     padding-bottom: 0.5rem;
     border-bottom: 1px solid #333;
   }
-}
 
-.loading,
-.error,
-.noResults {
-  font-size: 1.2rem;
-  text-align: center;
-  padding: 2rem;
-  margin: 1rem 0;
-  border-radius: 0.4rem;
-}
+  &__loading,
+  &__error,
+  &__noResults {
+    font-size: 1.2rem;
+    text-align: center;
+    padding: 2rem;
+    margin: 1rem 0;
+    border-radius: 0.4rem;
+  }
 
-.loading {
-  color: #aaa;
-}
+  &__loading {
+    color: #aaa;
+  }
 
-.error {
-  color: $netflix-red-color;
-  background-color: rgba(255, 68, 68, 0.1);
-}
+  &__error {
+    color: $netflix-red-color;
+    background-color: rgba(255, 68, 68, 0.1);
+  }
 
-.noResults {
-  color: #777;
+  &__noResults {
+    color: #777;
+  }
 }

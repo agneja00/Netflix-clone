@@ -26,19 +26,19 @@ const SearchResultsPage = () => {
         </h2>
 
         {isLoading ? (
-          <div className={styles.loading}>Loading results...</div>
+          <div className={styles.searchPage__loading}>Loading results...</div>
         ) : isError ? (
-          <div className={styles.error}>
+          <div className={styles.searchPage__error}>
             {error instanceof Error ? error.message : "Failed to load results"}
           </div>
         ) : results.length > 0 ? (
           <MovieCardList
             movies={results}
             category={`Search Results (${results.length})`}
-            showType={true}
+            showType
           />
         ) : (
-          <div className={styles.noResults}>
+          <div className={styles.searchPage__noResults}>
             {query
               ? "No results found for your search"
               : "Enter a search term to find movies and TV shows"}

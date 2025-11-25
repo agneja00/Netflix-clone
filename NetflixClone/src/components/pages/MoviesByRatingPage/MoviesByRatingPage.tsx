@@ -10,17 +10,25 @@ const MoviesByRatingPage = () => {
   const { rating } = useParams<{ rating: string }>();
   const { data: movies = [], isLoading, error } = useMoviesByRating(rating);
 
-  if (!rating) return <div className={styles.error}>No rating specified</div>;
-  if (isLoading) return <div className={styles.loading}>Loading movies...</div>;
-  if (error) return <div className={styles.error}>Error loading movies</div>;
+  if (!rating)
+    return <div className={styles.page__error}>No rating specified</div>;
+
+  if (isLoading)
+    return <div className={styles.page__loading}>Loading movies...</div>;
+
+  if (error)
+    return <div className={styles.page__error}>Error loading movies</div>;
 
   return (
     <>
       <PageTitle title={rating} />
       <Banner />
-      <div className={styles.wrapper}>
+
+      <div className={styles.page__wrapper}>
         <ContentFilter selectedFilter={rating} />
-        <h2 className={styles.title}>{rating}+ Rated Movies</h2>
+
+        <h2 className={styles.page__title}>{rating}+ Rated Movies</h2>
+
         {movies.length > 0 ? (
           <MovieCardList
             category={`${rating}+ Rated Movies`}
@@ -28,7 +36,7 @@ const MoviesByRatingPage = () => {
             showType
           />
         ) : (
-          <div className={styles.noResults}>
+          <div className={styles.page__noResults}>
             No movies found with {rating}+ rating
           </div>
         )}

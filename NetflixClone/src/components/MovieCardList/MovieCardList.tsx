@@ -25,24 +25,27 @@ const MovieCardList: React.FC<MovieCardListProps> = ({
   const movies = directMovies || fetchedMovies;
 
   if (isLoading)
-    return <div className={styles.loading}>Loading {category}...</div>;
+    return <div className={styles.list__loading}>Loading {category}...</div>;
+
   if (error)
-    return <div className={styles.error}>Error loading {category}</div>;
+    return <div className={styles.list__error}>Error loading {category}</div>;
+
   if (!movies?.length) return null;
 
   return (
-    <>
+    <div className={styles.list}>
       <h2 className={styles.list__title}>{category}</h2>
+
       <div className={styles.list__posters}>
         {isLoading
           ? Array.from({ length: 6 }).map((_, i) => (
-              <div key={i} className={styles.skeletonCard}></div>
+              <div key={i} className={styles.list__skeletonCard}></div>
             ))
           : movies.map((movie) => (
               <MovieCard key={movie.id} movie={movie} showType={showType} />
             ))}
       </div>
-    </>
+    </div>
   );
 };
 

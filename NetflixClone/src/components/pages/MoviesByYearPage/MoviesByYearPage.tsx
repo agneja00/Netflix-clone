@@ -10,20 +10,25 @@ const MoviesByYearPage = () => {
   const { year } = useParams<{ year: string }>();
   const { data: movies = [], isLoading, error } = useMoviesByYear(year);
 
-  if (!year || !/^\d{4}$/.test(year)) {
-    return <div className={styles.error}>Invalid year specified</div>;
-  }
+  if (!year || !/^\d{4}$/.test(year))
+    return <div className={styles.page__error}>Invalid year specified</div>;
 
-  if (isLoading) return <div className={styles.loading}>Loading movies...</div>;
-  if (error) return <div className={styles.error}>Error loading movies</div>;
+  if (isLoading)
+    return <div className={styles.page__loading}>Loading movies...</div>;
+
+  if (error)
+    return <div className={styles.page__error}>Error loading movies</div>;
 
   return (
     <>
       <PageTitle title={year} />
       <Banner />
-      <div className={styles.wrapper}>
+
+      <div className={styles.page__wrapper}>
         <ContentFilter selectedFilter={year} />
-        <h2 className={styles.title}>Movies from {year}</h2>
+
+        <h2 className={styles.page__title}>Movies from {year}</h2>
+
         {movies.length > 0 ? (
           <MovieCardList
             category={`${year} RELEASES`}
@@ -31,7 +36,9 @@ const MoviesByYearPage = () => {
             showType
           />
         ) : (
-          <div className={styles.noResults}>No movies found for {year}</div>
+          <div className={styles.page__noResults}>
+            No movies found for {year}
+          </div>
         )}
       </div>
     </>

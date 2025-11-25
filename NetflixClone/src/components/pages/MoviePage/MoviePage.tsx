@@ -11,9 +11,10 @@ const MoviePage = () => {
   const { id } = useParams<{ id: string }>();
   const { data: movie, isLoading, error } = useMovieDetails(id);
 
-  if (isLoading) return <div className={styles.loading}>Loading movie...</div>;
+  if (isLoading)
+    return <div className={styles.moviePage__loading}>Loading movie...</div>;
   if (error || !movie)
-    return <div className={styles.error}>Movie not found.</div>;
+    return <div className={styles.moviePage__error}>Movie not found.</div>;
 
   const trailer = movie.videos?.results?.find((v) => v.type === "Trailer");
   const base = API_CONFIG.TMDB.IMAGE_BASE.replace("/original/", "/");
@@ -21,6 +22,7 @@ const MoviePage = () => {
   return (
     <>
       <PageTitle title={movie.title} />
+
       <div className={styles.hero}>
         <img
           src={`${base}w1280${movie.backdrop_path}`}
@@ -34,8 +36,10 @@ const MoviePage = () => {
           className={styles.hero__backdrop}
           loading="lazy"
         />
+
         <h1 className={styles.hero__title}>{movie.title || movie.name}</h1>
       </div>
+
       <div className={styles.moviePage}>
         <div className={styles.moviePage__content}>
           <img
@@ -52,19 +56,21 @@ const MoviePage = () => {
           />
 
           <div className={styles.moviePage__details}>
-            <h2 className={styles.moviePage__details__title}>Overview</h2>
-            <p className={styles.moviePage__details__paragraph}>
+            <h2 className={styles.moviePage__detailsTitle}>Overview</h2>
+
+            <p className={styles.moviePage__detailsParagraph}>
               {movie.overview}
             </p>
 
             {movie.genres && (
               <>
-                <h3 className={styles.moviePage__details__title}>Genres</h3>
-                <ul className={styles.moviePage__details__list}>
+                <h3 className={styles.moviePage__detailsTitle}>Genres</h3>
+
+                <ul className={styles.moviePage__detailsList}>
                   {movie.genres.map((genre) => (
                     <FilterLink
                       key={genre.id}
-                      className={styles.moviePage__details__link}
+                      className={styles.moviePage__detailsLink}
                       to={generatePath(ROUTES.MOVIES_BY_GENRE, {
                         genre: genre.name,
                       })}
@@ -75,9 +81,11 @@ const MoviePage = () => {
                 </ul>
               </>
             )}
+
             {trailer && (
               <div className={styles.trailer}>
-                <h3 className={styles.moviePage__details__title}>Trailer</h3>
+                <h3 className={styles.moviePage__detailsTitle}>Trailer</h3>
+
                 <YouTube
                   videoId={trailer.key}
                   opts={{

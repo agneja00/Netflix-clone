@@ -5,42 +5,50 @@
   &__content {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
     gap: 2rem;
     margin-top: 2rem;
 
     @include respond-to("md") {
       flex-direction: row;
     }
+  }
 
-    &__poster {
-      border-radius: 0.5rem;
-    }
+  &__poster {
+    border-radius: 0.5rem;
   }
 
   &__details {
     flex: 1;
+  }
 
-    &__title,
-    &__paragraph {
-      margin: 1rem 0 0.5rem;
-    }
+  &__detailsTitle {
+    margin: 1rem 0 0.5rem;
+    color: $netflix-red-color;
+  }
 
-    &__title {
-      color: $netflix-red-color;
-    }
+  &__detailsParagraph {
+    margin: 1rem 0 0.5rem;
+    line-height: 1.6;
+  }
 
-    &__paragraph {
-      line-height: 1.6;
-    }
+  &__detailsList {
+    @include filter-type-and-filter-options-container;
+  }
 
-    &__list {
-      @include filter-type-and-filter-options-container;
-    }
+  &__detailsLink {
+    @include filter-selector-and-link;
+  }
 
-    &__link {
-      @include filter-selector-and-link;
-    }
+  &__loading {
+    text-align: center;
+    font-size: 1.2rem;
+    color: $secondary-color;
+  }
+
+  &__error {
+    text-align: center;
+    font-size: 1.2rem;
+    color: $secondary-color;
   }
 }
 
@@ -71,11 +79,4 @@
 
 .trailer {
   margin-top: 2rem;
-}
-
-.loading,
-.error {
-  text-align: center;
-  font-size: 1.2rem;
-  color: $secondary-color;
 }

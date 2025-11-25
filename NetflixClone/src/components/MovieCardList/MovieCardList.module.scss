@@ -3,14 +3,10 @@
     font-size: 1.4rem;
     text-transform: uppercase;
     padding-bottom: 0.7rem;
-    margin: 0.5rem 0;
+    margin: 1rem 0;
     font-weight: 700;
     color: $netflix-red-color;
     border-bottom: 1px solid $netflix-red-color;
-
-    @include respond-to("md") {
-      margin: 0;
-    }
   }
 
   &__posters {
@@ -28,7 +24,7 @@
     }
   }
 
-  .loading {
+  &__loading {
     display: grid;
     gap: 1.5rem;
     grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
@@ -40,19 +36,19 @@
     }
   }
 
-  .error {
+  &__error {
     color: $netflix-red-color;
     text-align: center;
     padding: 2rem 0;
   }
-}
 
-.skeletonCard {
-  aspect-ratio: 2 / 3;
-  border-radius: 0.4rem;
-  background: linear-gradient(90deg, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.2s infinite linear;
+  &__skeletonCard {
+    aspect-ratio: 2 / 3;
+    border-radius: 0.4rem;
+    background: linear-gradient(90deg, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.2s infinite linear;
+  }
 }
 
 @keyframes shimmer {

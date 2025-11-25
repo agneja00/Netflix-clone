@@ -32,7 +32,9 @@ const ContentFilter: React.FC<FilterProps> = ({ selectedFilter }) => {
 
   const renderFilterButtons = () => {
     if (isLoadingGenres && activeFilterType === "genre") {
-      return <div className={styles.loading}>Loading filters...</div>;
+      return (
+        <div className={styles.contentFilter__loading}>Loading filters...</div>
+      );
     }
 
     switch (activeFilterType) {
@@ -40,6 +42,7 @@ const ContentFilter: React.FC<FilterProps> = ({ selectedFilter }) => {
         return genres.map((g) => (
           <FilterLink
             key={g.id}
+            className={styles.contentFilter__option}
             active={selectedFilter === g.name.toLowerCase()}
             to={generatePath(ROUTES.MOVIES_BY_GENRE, {
               genre: g.name.toLowerCase(),
@@ -53,6 +56,7 @@ const ContentFilter: React.FC<FilterProps> = ({ selectedFilter }) => {
         return years.map((y) => (
           <FilterLink
             key={y}
+            className={styles.contentFilter__option}
             active={selectedFilter === y.toString()}
             to={generatePath(ROUTES.MOVIES_BY_YEAR, { year: y.toString() })}
           >
@@ -64,6 +68,7 @@ const ContentFilter: React.FC<FilterProps> = ({ selectedFilter }) => {
         return ratings.map((r) => (
           <FilterLink
             key={r}
+            className={styles.contentFilter__option}
             active={selectedFilter === r.toString()}
             to={generatePath(ROUTES.MOVIES_BY_RATING, {
               rating: r.toString(),
@@ -79,13 +84,15 @@ const ContentFilter: React.FC<FilterProps> = ({ selectedFilter }) => {
   };
 
   return (
-    <>
-      <div className={styles.filterContainer}>
-        <span className={styles.filterLabel}>Filter by:</span>
+    <div className={styles.contentFilter}>
+      <div className={styles.contentFilter__controls}>
+        <span className={styles.contentFilter__label}>Filter by:</span>
 
         <button
-          className={`${styles.filterTypeSelector} ${
-            activeFilterType === "genre" ? styles.filterTypeActive : ""
+          className={`${styles.contentFilter__typeButton} ${
+            activeFilterType === "genre"
+              ? styles["contentFilter__typeButton--active"]
+              : ""
           }`}
           onClick={() => setActiveFilterType("genre")}
         >
@@ -93,8 +100,10 @@ const ContentFilter: React.FC<FilterProps> = ({ selectedFilter }) => {
         </button>
 
         <button
-          className={`${styles.filterTypeSelector} ${
-            activeFilterType === "year" ? styles.filterTypeActive : ""
+          className={`${styles.contentFilter__typeButton} ${
+            activeFilterType === "year"
+              ? styles["contentFilter__typeButton--active"]
+              : ""
           }`}
           onClick={() => setActiveFilterType("year")}
         >
@@ -102,8 +111,10 @@ const ContentFilter: React.FC<FilterProps> = ({ selectedFilter }) => {
         </button>
 
         <button
-          className={`${styles.filterTypeSelector} ${
-            activeFilterType === "rating" ? styles.filterTypeActive : ""
+          className={`${styles.contentFilter__typeButton} ${
+            activeFilterType === "rating"
+              ? styles["contentFilter__typeButton--active"]
+              : ""
           }`}
           onClick={() => setActiveFilterType("rating")}
         >
@@ -111,8 +122,9 @@ const ContentFilter: React.FC<FilterProps> = ({ selectedFilter }) => {
         </button>
       </div>
 
-      <div className={styles.filterOptionsContainer}>
+      <div className={styles.contentFilter__options}>
         <FilterLink
+          className={styles.contentFilter__option}
           to={ROUTES.HOME}
           active={!params.genre && !params.year && !params.rating}
         >
@@ -121,7 +133,7 @@ const ContentFilter: React.FC<FilterProps> = ({ selectedFilter }) => {
 
         {renderFilterButtons()}
       </div>
-    </>
+    </div>
   );
 };
 
