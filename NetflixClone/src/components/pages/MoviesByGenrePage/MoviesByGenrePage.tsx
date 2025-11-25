@@ -13,7 +13,7 @@ const MoviesByGenrePage = () => {
 
   const fetchUrl = genre ? getGenreFetchUrl(genre, genres) : null;
   const selectedGenre = genres.find(
-    (g) => g.name.toLowerCase() === genre?.toLowerCase()
+    (g) => g.name.toLowerCase() === genre?.toLowerCase(),
   );
 
   const {

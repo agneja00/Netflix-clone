@@ -20,6 +20,7 @@ A modern and responsive movie browsing app built with **React**, **Vite**, **Typ
 
 - React vite
 - Typescript
+- BEM Methodology
 - SASS
 - React Testing Library
 - Jest
