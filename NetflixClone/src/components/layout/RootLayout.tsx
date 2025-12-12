@@ -6,9 +6,9 @@ export const RootLayout = () => {
   return (
     <>
       <Nav />
-      <div className={styles.root}>
+      <main className={styles.root}>
         <Outlet />
-      </div>
+      </main>
     </>
   );
 };
